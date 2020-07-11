@@ -1,0 +1,121 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+<!-- {% block headblock %}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+{% endblock %} -->
+
+{% block mainblock %}
+
+
+<!-- Datatables Content -->
+{% for i in category %}
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>{{i.name}}</strong> Posts</h2>
+    </div>
+
+    <div class="table-responsive">
+        <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+        <table id="{{i.name}}" class="table table-vcenter table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Image</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Writer</th>
+                    <th>Views</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+           
+                {% for j in news %}
+                {% if i.name == j.catname %}
+                    <tr>
+                    <td class="text-center">{{j.pk}}</td>
+                    <td class="text-center"><img style="display: inline-block; height: 50px; width: 50px;" src={{j.picurl}} alt="avatar" class="img-circle"></td>
+                    <td>{{j.name}}</td>
+                    <td>{{j.time}} | {{j.date}}</td>
+                    <td>{{j.catname}}</td>
+                    <td>{{j.writer}}</td>
+                    <td>{{j.views}}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            
+                            <a href="{% url 'news_edit' pk=j.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil">Edit</i></a>
+                            <a href="{% url 'news_delete' pk=j.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                            <!-- <form method= "post" action="{% url 'news_delete' pk=j.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" data-toggle="tooltip" class="btn btn-xs btn-danger">Delete</button>
+                                
+                            </form> -->
+                        </div>
+                    </td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+  
+            </tbody>  
+        </table>
+        
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <!-- <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script> -->
+    <!-- <script>$(function(){ TablesDatatables.init(); });</script> -->
+    
+    <!-- <script>
+               const searchFun = () => {
+
+                let filter = document.getElementById('myInput').value.toUpperCase();
+
+                let myTable = document.getElementById('example-datatable');
+
+                let tr = myTable.getElementsByTagName('tr');
+
+                for(var i=0; i<tr.length; i++){
+                    let td = tr[i].getElementsByTagName('td')[2];
+
+                    if(td){
+                        let textvalue = td.textContent || td.innerHTML;
+
+                        if(textvalue.toUpperCase().indexOf(filter) > -1){
+                            tr[i].style.display = "";
+                        }else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+
+                }
+    </script> -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    
+    {% for k in category %}
+    <script>
+        $(document).ready(function() {
+        $('#{{k.name}}').DataTable();
+    } );
+    </script>
+    {% endfor %}
+
+{% endblock %}

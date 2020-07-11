@@ -1,0 +1,641 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+    <!-- head-section -->
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>OSRU - News, Blog & Magazine HTML Template</title>
+        
+        
+        {% block home-head-references %}
+<!-- Home  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block detail-head-references %}
+<!-- Detail  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block section-head-references %}
+<!-- Section  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block search-head-references %}
+<!-- Search  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block about-head-references %}
+<!-- About  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block contact-head-references %}
+<!-- Contact  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block copyright-head-references %}
+<!-- Copyright  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block privacy-head-references %}
+<!-- Privacy  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block terms_of_service-head-references %}
+<!-- Terms_of_service  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+
+        {% block cookie-head-references %}
+<!-- Cookie  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block diversity_and_corrections-head-references %}
+<!-- Diversity_and_corrections_policy  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block ownership-head-references %}
+<!-- Ownership  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block ethics-head-references %}
+<!-- Ethics  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        
+
+    </head>
+
+    <!-- body-section -->
+    <body>
+        <div class="main-content animsition">
+            <!-- top-header -->
+            <div class="top-header dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-7">
+                            <div class="header-nav">
+                                <ul>
+                                    <li><span class="headre-weather"><i class="fa fa-calendar-check-o"></i>&nbsp; {{today}}</span></li>
+                                    <li><a href="{% url 'about' %}">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-5">
+                            <ul class="top-socia-share">
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'mylogin' %}">Login</a>
+                                </li>
+                                <li>
+                                    <div class="weather-top">
+                                        
+                                        <div class="weather-now">
+                                            <span class="degrees">{{temp}}</span>
+                                            <span class="unit">C</span>
+                                        </div>
+
+                                        <div class="weather-city">{{city}} </div>
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- navigation -->
+            <nav class="navbar navbar-inverse navbar-sticky navbar-mobile bootsnav">
+                <div class="container">
+                    <div class="attr-nav">
+                        <ul>
+                            <li class="side-menu"><a href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
+                            <li id="btn-search1"><a href="javascript:void(0)" id="btn-search2"><i class="fa fa-search"></i></a></li>
+            
+                        </ul>
+                    </div>
+                    <!-- End Atribute Navigation -->
+                    <!-- Start Header Navigation -->
+                    <div class="navbar-header">
+                       
+                        <a class="navbar-brand" href="index.html"><img src="{% static 'front/img/logo-white.png' %}" class="logo" alt=""></a>
+                    </div>
+                    <!-- End Header Navigation -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-menu">
+                        <ul class="nav navbar-nav navbar-center" data-in="navFadeInDown" data-out="navFadeOutUp">
+                            <!-- video-section -->
+                            {% for i in category %}
+                            <li class="dropdown megamenu-fw megamenu-video">
+                                <a href="#" class="dropdown-toggle">{{i.name}}</a>
+                                <ul class="dropdown-menu megamenu-content" role="menu">
+                                    <li>
+                                        <div class="row m_0">
+                                            {% for j in heading_posts %}
+                                            {% if j.catname == i.name %}
+                                            <div class="col-menu-video col-md-3">
+                                                <article class="post_article">
+                                                    <a class="post_img" href="details-video.html">
+                                                        <figure><img  style="width: 200px; height: 145px;" class="img-responsive" alt="" src="{{j.picurl}}"></figure>        
+                                                    </a>
+                                                    <h4><a href="details-video.html">{{j.name}}</a></h4>
+                                                </article>
+                                            </div><!-- end col-3 -->
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div><!-- end row -->
+                                    </li>
+                                </ul>
+                            </li>
+                            {% endfor %}
+
+                            <li><a href="contact.html">Contact</a></li>
+
+                        </ul>
+                    </div> 
+                </div>  
+                <!-- side-menu -->
+                <div class="side" id="side">
+                    <a href="#" class="close-side"><i class="ti-close"></i></a>
+                    <div class="widget">
+                        <h3 class="widget-title"><strong>Menu</strong></h3>
+                        <ul class="link">
+                            {% for i in category %}
+                            <li><a href="about-me.html">{{i.name}}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'about' %}">About</a></li>
+                        </ul>
+                    </div>
+                
+                    <div class="social_share_btn">
+                        <h3 class="widget-title">Subscribe</h3>
+                        <ul>
+                            <li class="li-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
+                            <li class="li-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+                            <li class="li-google-plus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i> Google +</a></li>
+                            <li class="li-pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest-p"></i> Pinterest</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.End of subscribe -->
+                </div> 
+                <!-- End of side menu -->
+                <div class="side-overlay"></div>
+            </nav>
+            <div class="clearfix"></div>
+
+            <!-- search -->
+            <div class="search">
+                <button id="btn-search-close" class="btn btn--search-close" aria-label="Close search form"> <i class="ti-close"></i></button>
+                <form action="{% url 'news_search' %}" class="search__form" action="javascript:void(0)" method="post">
+                    {% csrf_token %}
+                    <input class="search__input" name="search" type="search"  placeholder="Search and hit enter..."/>
+                    <span class="search__info">Hit enter to search or ESC to close</span>
+                </form>
+                <div class="search__related">
+                    <div class="search__suggestion">
+                        <h3>May We Suggest?</h3>
+                        <p>#drone #funny #catgif #broken #lost #hilarious #good #red #blue #nono #why #yes #yesyes #aliens #green</p>
+                    </div>
+                    <div class="search__suggestion">
+                        <h3>Is It This?</h3>
+                        <p>#good #red #hilarious #blue #nono #why #yes #yesyes #aliens #green #drone #funny #catgif #broken #lost</p>
+                    </div>
+                    <div class="search__suggestion">
+                        <h3>Needle, Where Art Thou?</h3>
+                        <p>#broken #lost #good #red #funny #hilarious #catgif #blue #nono #why #yes #yesyes #aliens #green #drone</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- top-trending-slider -->
+            <div class="container">
+                <div class="newstricker_inner">
+                    <div class="trending"><strong>Trending</strong> Now</div>
+                        <div id="newsTicker" class="owl-carousel owl-theme">
+                            {% for i in newstrend %}
+                            <div class="item">
+                                <a href="#">{{i.name}}.</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+            </div>
+
+            <!-- Title-Post-Boxes -->
+            {% block home-title-posts %}
+<!-- Home  ------------------------------------------- Title Posts ----------------------------------------------- -->
+            {% endblock %}
+
+            <!-- Main-page-content -->
+            <div class="page-content">
+                <div class="container">
+                    <div class="row">
+
+                        {% block home-main-posts %}
+<!-- Home  ------------------------------------------- Main Posts----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block detail-main-posts %}
+<!-- Detail  ------------------------------------------- Main Posts----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block section-main-posts %}
+<!-- Section  ------------------------------------------- Main Posts----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block search-main-posts %}
+<!-- Search  ------------------------------------------- Main Posts----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block about-main-posts %}
+<!-- About  ------------------------------------------- Main Posts----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block contact-main-content %}
+<!-- Contact  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block copyright-main-posts %}
+<!-- Copyright  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block privacy-main-posts %}
+<!-- Privacy  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block terms_of_service-main-posts %}
+<!-- Terms_of_service  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+
+                        {% block cookie-main-posts %}
+<!-- Cookie  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block diversity_and_corrections-main-posts %}
+<!-- Diversity_and_corrections_policy  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block ownership-main-posts %}
+<!-- Ownership  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+                        {% block ethics-main-posts %}
+<!-- Ethics  ------------------------------------------- Head References----------------------------------------------- -->
+                        {% endblock %}
+
+
+
+                        <!-- Aside Section -->
+                        <aside class="col-xs-12 col-sm-4 col-md-3 rightSidebar" style="float: right">
+                            <!-- About Me -->
+                            <!-- <div class="about-card">
+                                <div class="ui divider">About me</div>
+                                <figure>
+                                    <img src="{% static 'front/img/about-avatar2.jpg' %}" class="img-responsive center-block" alt="">
+                                </figure>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                                <img src="{% static 'front/img/signature.png' %}" class="img-responsive center-block" alt="">
+                            </div> -->
+
+                            <!-- Most viewed Posts -->
+                            <div class="latest_post_widget">
+                                <div class="title-holder2">
+                                    <h3 class="title">Most Viewed</h3>
+                                </div>
+
+                                {% for i in most_viewed %}
+                                <div class="media latest_post">
+                                    <a class="media-left" href="#">
+                                        <img src="{{i.picurl}}" class="media-object" alt="">
+                                    </a>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"><a href="#">{{i.name}}</a></h6>
+                                        <div class="entry-meta">
+                                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{i.date}}</time></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <!-- /.End of latest post -->
+                            
+                            <div class="social_share_btn" style="border: 1px solid #eaeaea; padding: 15px;">
+                                <div class="title-holder2">
+                                    <h3 class="title">Subscribe</h3>
+                                </div>
+                                <ul>
+                                    <li class="li-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
+                                    <li class="li-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+                                    <li class="li-pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest-p"></i> Pinterest</a></li>
+                                    <li class="li-google-plus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i> Google</a></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- /.End of subscribe -->
+                            {% if tags %}
+                            <div class="tag_widget category-holder">
+                                <div class="title-holder2"><h3>Tags</h3></div>
+                                <!--  /.End of title -->
+                                <a href="#">WordPress</a>
+                                <a href="#">HTML</a>
+                                <a href="#">CSS</a>
+                                <a href="#">PHP</a>
+                                <a href="#">Fashion</a>
+                                <a href="#">News</a>
+                                <a href="#">Blog</a>
+                                <a href="#">Travel</a>
+                                <a href="#">Politics</a>
+                                <a href="#">Economy</a>
+                                <a href="#">Javascript</a>
+                            </div>
+                            {% endif %}
+                            <!-- end-of-tags -->
+                        </aside>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- news letter -->
+            <div class="newslatter">
+                <div class="container">
+                    <h3>Sign Up for Our <em>Newsletter</em></h3>
+                    <p>Subscribe now to get notified about your favourite content<br> from The "...." every week!</p>
+                    <form action="{% url 'news_letter' %}" method="post" class="navbar-form" role="search">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email address" id="email" name="email" required>
+                            <input type="text" class="form-control" placeholder="Your name" id="name" name="name" required>
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Add Up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!--instagram -->
+            <div class="insta-content">
+                <div class="insta-link"><a href="#" rel="me" target="_blank" class="">Treat For Your Eyes</a></div>
+                <div id="ri-grid" class="ri-grid ri-grid-size-2">
+                    <img class="ri-loading-image" src="{% static 'front/img/loading.gif' %}" alt=""/>
+                    <ul>
+                        {% for i in pictures_gallery %}
+                        <li><a href="#"><img src="{{i.picurl}}" alt=""/></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- footer -->
+            <footer class="footer-black">
+                <div class="main-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">
+                                <div class="footer-box">
+                                    <div class="footer-logo">
+                                        <img src="{% static 'front/img/logo-white.png' %}" class="img-responsive" alt="">
+                                    </div>
+                                    <p>It is a long established fact that a reader<br>
+                                        will be distracted by the readable content of<br>
+                                        a page when looking at its layout. The point<br>
+                                        of using Lorem Ipsum</p>
+                                    <div class="textwidget"><p>457 BIgBlue Street, Suite 4A<br>
+                                            New York, NY 10013<br>
+                                            <span>(315) 5512-2579</span><br>
+                                            <!--<a href="mailto:info@example.com">info@example.com</a>-->
+                                        </p>
+                                    </div>
+                                    <p>Contact us on <a href="https://osruhtml.bdtask.com/cdn-cgi/l/email-protection#61080f070e210419000c110d044f020e0c"><strong><span class="__cf_email__" data-cfemail="254c4b434a65405d44485549400b464a48">[email&#160;protected]</span></strong></a></p> 
+                                </div>
+                            </div>
+                            <div class="hidden-sm col-md-3">
+                                <div class="footer-box">
+                                    <h3 class="widget-title title-white">Twitter</h3>
+                                    <ul class="twitter-widget">
+                                        <li>
+                                            <div class="icon"><i class="ti-twitter"></i></div>
+                                            <div class="tweet-text">
+                                                So proud to have become an <a target="_blank" href="#">@envato</a> Power Elite author. Drop our #ThemeForest: <a target="_blank" href="#">https://t.co/jGyLLggygN</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon"><i class="ti-twitter"></i></div>
+                                            <div class="tweet-text">
+                                                So proud to have become an <a target="_blank" href="#">@envato</a> Power Elite author. Drop out our #ThemeForest: <a target="_blank" href="#">https://t.co/jGyLLggygN</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <div class="footer-box">
+                                    <h3 class="widget-title title-white">Need help</h3>
+                                    <ul class="footer-cat">
+                                        <li><a href="#">Our Community</a></li>
+                                        <li><a href="#">See Our Portfolio</a></li>
+                                        <li><a href="#">Story About Us</a></li>
+                                        <li><a href="#">Keep in Touch</a></li>
+                                        <li><a href="#">Purchase Our Products</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-3">
+                                <div class="footer-box">
+                                    <h3 class="widget-title title-white">Latest Post</h3>
+                                    <!-- /.latest post -->
+                                    {% for i in news %}
+                                    {% if i.identifier_home == "Aside" %}
+                                    <div class="media latest_post">
+                                        <a class="media-left" href="#">
+                                            <img src="{{i.picurl}}" class="media-object" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                            <h6 class="media-heading"><a href="#">{{i.name}}</a></h6>
+                                            <div class="entry-meta">
+                                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-footer">
+                    Copyright � 2017 by Bdtask. All Rights Reserved.
+                </div>
+            </footer>
+        </div>
+        <!-- /.End of main content -->
+        <div class="modal fade user-modal" id="user-modal">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#login" data-toggle="tab">Log in</a></li>
+                            <li><a href="#register" data-toggle="tab">Register</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="login">
+                                <div class="form-content text-center">
+                                    <h2>Sign In</h2>
+                                    <p>Chose One of the Following Methods.</p>
+                                    <div class="social-btn">
+                                        <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i>With Facebook</a>
+                                        <a href="#" class="btn btn-plush"><i class="fa fa-google-plus"></i>With Google +</a>
+                                    </div>
+                                    <div class="ui horizontal divider">Or </div>
+                                    <p>Sign in Using Your Email Address</p>
+                                    <div class="form-group">
+                                        <input class="form-control" name="f_name" id="f_name2" placeholder="Username or email" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="pass" id="pass" placeholder="Password" type="text">
+                                    </div>
+                                    <div class="block-content">
+
+                                        <div class="checkbox checkbox-danger">
+                                            <input id="checkbox8" type="checkbox">
+                                            <label for="checkbox8">
+                                                Remember me
+                                            </label>
+                                        </div>
+                                        <a href="#" class="forgot">Forgot Password?</a>
+                                    </div>
+                                    <a href="#" class="btn link-btn btn-block btn-rounded">Login &#8702;</a>
+                                    <div class="">Don't have an account? <a href="#">Sign up Now</a></div>
+                                </div>
+                                <!-- /.End of Login -->
+                            </div>
+                            <div class="tab-pane fade" id="register">
+                                <div class="form-content">
+                                    <h2 class="text-center">Sign Up For Free</h2>
+                                    <div class="form-group">
+                                        <input class="form-control" name="name" id="name" placeholder="Your Name" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="email" id="email" placeholder="Your Email Address" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="c_name" id="c_name" placeholder="Your Company Name" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="pass2" id="pass2" placeholder="Enter Your Password" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="r_pass" id="r_pass" placeholder="Retype Your Password" type="text">
+                                    </div>
+                                    <div class="block-content">
+                                        <div><i class="fa fa-shield"></i><span>Your Password at Global Crypto are encrypted and Secured</span></div>
+                                    </div>
+                                    <a href="#" class="btn link-btn btn-block btn-rounded">Sign Up &#8702;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.End of Sign up  Sing in -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        {% block home-bottom-scripts %}
+<!-- Home  ------------------------------------------- Bottom Scripts----------------------------------------------- -->
+        {% endblock %}
+
+        {% block detail-bottom-scripts %}
+<!-- Detail  ------------------------------------------- Bottom Scripts----------------------------------------------- -->
+        {% endblock %}
+
+        {% block section-bottom-scripts %}
+<!-- Section  ------------------------------------------- Bottom Scripts----------------------------------------------- -->
+        {% endblock %}
+
+        {% block search-bottom-scripts %}
+<!-- Search  ------------------------------------------- Bottom Scripts----------------------------------------------- -->
+        {% endblock %}
+
+        {% block about-bottom-scripts %}
+<!-- Search  ------------------------------------------- Bottom Scripts----------------------------------------------- -->
+        {% endblock %}
+
+        {% block contact-bottom-scripts %}
+<!-- Contact  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block copyright-bottom-scripts %}
+<!-- Copyright  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block privacy-bottom-scripts %}
+<!-- Privacy  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block terms_of_service-bottom-scripts %}
+<!-- Terms_of_service  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block cookie-bottom-scripts %}
+<!-- Cookie  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block diversity_and_corrections-bottom-scripts %}
+<!-- Diversity_and_corrections_policy  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block ownership-bottom-scripts %}
+<!-- Ownership  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+        {% block ethics-bottom-scripts %}
+<!-- Ethics  ------------------------------------------- Head References----------------------------------------------- -->
+        {% endblock %}
+
+
+
+        <script data-cfasync="false" src="{% static 'front/cloudflare-static/email-decode.min.js' %}"></script>
+        <script src="{% static 'front/js/jquery.min.js' %}"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                'use strict';
+                //Grid content 
+                var masonry = new Macy({
+                    container: '.grid-content',
+                    trueOrder: false,
+                    waitForImages: false,
+                    useOwnImageLoader: false,
+                    debug: true,
+                    mobileFirst: true,
+                    columns: 1,
+                    margin: 30,
+                    breakAt: {
+                        1200: 2,
+                        992: 2,
+                        768: 2,
+                        480: 2
+                    }
+                });
+            });
+        </script>
+
+    </body>
+
+</html>

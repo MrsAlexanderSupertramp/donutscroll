@@ -1,0 +1,86 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block headblock %}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+{% endblock %}
+
+{% block mainblock %}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Comment Replies<br><small>You can manage the replies made to comment on posts.</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Panel</li>
+    <li><a href="/panel/comments/list">Comments</a></li>
+    <li><a href="/panel/comments/{{pk}}/reply/list/">Comment Reply</a></li>
+</ul>
+
+
+<!-- Datatables Content -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Comment</strong> Replies</h2>
+            </div>
+
+            <div class="table-responsive">
+                <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                <table id="datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th>Comments</th>
+                            <th>Name</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for i in replies %}
+                            <tr>
+                            <td class="text-center">{{i.pk}}</td>
+                            <td>{{i.body}}</td>
+                            <td class="text-center">{{i.name}}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'comments_reply_delete' pk=i.pk news_pk=pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                                </div>
+                            </td>
+                            </tr>
+                        {% endfor %}
+        
+                    </tbody>  
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <script>
+        $(document).ready(function() {
+        $('#datatable').DataTable();
+    } );
+    </script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+
+{% endblock %}

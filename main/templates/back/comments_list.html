@@ -1,0 +1,142 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block headblock %}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+{% endblock %}
+
+{% block mainblock %}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Comments<br><small>You can manage the comments made on all the posts.</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Panel</li>
+    <li><a href="/panel/comments/list">Comments</a></li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+                <h2><strong>Pictures</strong> Add</h2>
+            </div>
+ 
+            <!-- comment-doodle -->
+            <div class="widget-main" style="padding-bottom: 20px;">
+                <div class="gallery gallery-widget" data-toggle="lightbox-gallery">
+                    <div class="row">
+                        {% for i in doodles %}
+                        <div class="col-xs-3 col-sm-2 col-md-1">
+                            <a href="{{i.comments_picurl}}" class="gallery-link" title="Image Info">
+                                <img src="{{i.comments_picurl}}" alt="image" style="height:70px; width: 70px; border-radius: 50%;">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+             <!-- Basic Form Elements Content -->
+             <form action="{% url 'doodle_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                {% csrf_token %}
+                 <div class="form-group">
+                    <div class="col-md-1">
+                    </div>
+                     <div class="col-md-4">
+                        <input id="myfile" name="myfile" type="file" class="form-control" placeholder="select doodle">
+                     </div>
+                     <div class="col-md-3">
+                        <input id="custome_name" name="custome_name" type="text" class="form-control" placeholder="Custome Name" required>
+                     </div>
+                     <div class="col-md-2">
+                         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                     </div>
+                     <div class="col-md-2">
+                        <a href="{% url 'doodle_list' %}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-angle-right"></i> Delete</a>
+                    </div>
+                 </div>
+ 
+             </form>
+        
+        </div>
+    </div>
+</div>
+
+<!-- Datatables Content -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Comment</strong> List</h2>
+            </div>
+
+            <div class="table-responsive">
+                <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                <table id="datatable" class="table table-vcenter table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Image</th>
+                            <th>Comments</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Reply Counts</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for i in comments %}
+                            <tr>
+                            <td class="text-center">{{i.pk}}</td>
+                            <td class="text-center"><img style="display: inline-block; height: 50px; width: 50px;" src={{i.picurl}} alt="avatar" class="img-circle"></td>
+                            <td>{{i.body}}</td>
+                            <td class="text-center">{{i.name}}</td>
+                            <td class="text-center">{{i.count}}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    
+                                    <a href="{% url 'comments_reply_list' pk=i.pk %}" data-toggle="tooltip" title="Replies" class="btn btn-xs btn-default"><i class="fa fa-pencil">Replies</i></a>
+                                    <a href="{% url 'comments_delete' pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+
+                                </div>
+                            </td>
+                            </tr>
+                        {% endfor %}
+        
+                    </tbody>  
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <script>
+        $(document).ready(function() {
+        $('#datatable').DataTable();
+    } );
+    </script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block mainblock %}
+<!-- Datatables Header -->
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Identifier List<br><small>You can add & delete Site Identifier here !</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Category</li>
+    <li><a href="/panel/singular_manager/identifier_home/list">List</a></li>
+</ul>
+<!-- END Datatables Header -->
+
+
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title" style="padding: 10px;">
+        <h2><strong>Identifier</strong> List - HomePage</h2>
+
+        <a href="/panel/singular_manager/identifier_home/add" class="btn btn-primary" style="float: right;">ADD</a>
+    </div>
+
+    <div class="table-responsive">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th>HomePage Identifier</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for i in obj %} 
+                <tr>
+                    <td class="text-center">{{i.pk}}</td>
+                    <td>{{i.identifier_home}}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a href="{% url 'identifier_home_edit' pk=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil">Edit</i></a>
+                            <a href="{% url 'identifier_home_remove' pk=i.pk %}" data-toggle="tooltip" title="Remove" class="btn btn-xs btn-danger"><i class="fa fa-times">Remove</i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- END Datatables Content -->
+
+
+{% endblock %}

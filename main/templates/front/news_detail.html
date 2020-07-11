@@ -1,0 +1,351 @@
+{% extends 'front/master.html' %}
+
+{% load static %}
+
+
+
+{% block detail-head-references %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>OSRU - News, Blog & Magazine HTML Template</title>
+<link href="{% static 'front/img/favicon.png'%}" rel="icon">
+<link href="{% static 'front/css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'front/css/animsition.min.css'%}" rel="stylesheet">
+<link href="{% static 'front/css/font-awesome.min.css'%}" rel="stylesheet">
+<link href="{% static 'front/themify-icons/themify-icons.css'%}" rel="stylesheet">
+<link href="{% static 'front/css/bootsnav.css'%}" rel="stylesheet">
+<link href="{% static 'front/owl-carousel/owl.carousel.css'%}" rel="stylesheet">
+<link href="{% static 'front/owl-carousel/owl.theme.css'%}" rel="stylesheet">
+<link href="{% static 'front/owl-carousel/owl.transitions.css'%}" rel="stylesheet">
+<link href="{% static 'front/css/magnific-popup.css'%}" rel="stylesheet">
+<link href="{% static 'front/css/fluidbox.min.css'%}" rel="stylesheet">
+<link href="{% static 'front/css/style.css'%}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
+
+
+
+{% block detail-main-posts %}
+
+<main class="col-sm-8 col-md-9 content p_r_40">
+    <div class="details-body">
+
+
+        <div class="post_details stickydetails">
+            <header class="details-header">
+                <div class="post-cat"><a class="post-cat" href="#">{{news_details.catname}}</a></div>
+                <h2>{{news_details.name | safe}}</h2>
+                <div class="element-block">
+                    <div class="entry-meta">
+                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
+                        <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                    </div>
+                    <div class="reading-time"><span class="eta"></span> (<span class="words"></span> words)</div>
+                    <figure>    
+                        <img src="{{news_details.picurl}}" alt="" class="aligncenter img-responsive">
+                    </figure>
+                </div>
+            </header>
+            <h4>{{news_details.intro_text | safe}}.</h4><hr><br>
+            <p>{{news_details.body_text | safe}}.</p>
+        </div>
+        <!-- /.End of post details -->
+
+
+    </div>
+    <!-- /.End of details body -->
+    <aside class="about-author">
+        <h3>About The Author</h3>
+        <div class="author-bio">
+            <div class="author-img">
+                <a href="#"><img alt="Johnny Doe" src="{% static 'front/img/about-avatar.jpg'%}" class="avatar img-responsive"></a>												
+            </div>
+            <!-- /. Author-img -->
+            <div class="author-info">
+                <h4 class="author-name">Johnny Doe</h4>
+                <p>Johnny Doe was born in Ulm, in the Kingdom of Württemberg in the German Empire on 14 March 1879. His father was Hermann Einstein, a salesman and engineer. He was a really good man for sure.</p>
+                <p>
+                    <a class="social-link facebook" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="social-link twitter" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="social-link vine" href="#"><i class="fa fa-vine"></i></a>
+                    <a class="social-link dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+                    <a class="social-link instagram" href="#"><i class="fa fa-instagram"></i></a>
+                </p>
+            </div>
+            <!-- /. Author-info -->
+        </div>
+        <!-- /.End of author bio -->
+    </aside>
+    <!-- /.End of about author -->
+
+    <!-- Comment Section -->
+    <div class="comments">
+        <h3 class="comment_title">{{comments_count}} Comments</h3>
+
+        {% for i in comments %}
+        <div class="media">
+            <div class="media-left">
+                <img src="{{i.picurl}}" alt="" style="border-radius: 50%;  height: 60px; width: 60px; object-fit: cover;" class="media-object">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{i.name}} <small><i>Posted on February 19, 2016</i></small></h4>
+                <p>{{i.body}}.</p>
+                <a class="btn link-btn btn-rounded" id="show">Reply ⇾</a>
+            </div>
+
+            <!-- comment reply form -->
+            <div class="comment_form" style="width: 70%; margin: auto; padding-top: 20px;" id="hide">
+                <h3 class="replay_title">Leave a Reply </h3>
+                <form action="{% url 'comments_reply_add'%}" class='inline_login_form' method='POST' id='__w2_wHUAq3k520_login_form'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" id="CommentReplyBody" name="CommentReplyBody" rows="5"></textarea>
+                    </div>
+                    {% if 'container' not in request.session %}
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name *</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="CommentReplyName" name="CommentReplyName" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email *</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="CommentReplyEmail" name="CommentReplyEmail" type="text">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <input type="text" class="hidden" id="news_pk" name="news_pk" value="{{pk}}">
+                    <input type="text" class="hidden" id="comments_pk" name="comments_pk" value="{{i.pk}}">
+
+                    <button type="submit" class="btn link-btn">Post Comment ⇾</button>
+                </form>
+            </div>
+
+            {% for j in comments_reply %}
+            {% if j.comment_id == i.pk %}
+            <div class="media" style="width: 77%; margin: auto; padding-top: 20px;">
+                <div class="media-left">
+                    <img src="{{j.picurl}}" alt="" class="media-object" style="border-radius: 50%; height: 60px; width: 60px; object-fit: cover;">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{j.name}} <small><i>Posted on February 19, 2016</i></small></h4>
+                    <p>{{j.body}}.</p>
+                    <a class="btn link-btn btn-rounded">Reply ⇾</a>
+                </div>
+            </div>
+
+            <!-- comment reply-reply form -->
+            <div class="comment_form" style="width: 70%; margin: auto; padding-top: 20px;">
+                <h3 class="replay_title">Leave a Reply </h3>
+                <form action="{% url 'comments_reply_add'%}" class='inline_login_form' method='POST' id='__w2_wHUAq3k520_login_form'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" id="CommentReplyBody" name="CommentReplyBody" rows="5"></textarea>
+                    </div>
+                    {% if 'container' not in request.session %}
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name *</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="CommentReplyName" name="CommentReplyName" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email *</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="CommentReplyEmail" name="CommentReplyEmail" type="text">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <input type="text" class="hidden" id="news_pk" name="news_pk" value="{{pk}}">
+                    <input type="text" class="hidden" id="comments_pk" name="comments_pk" value="{{i.pk}}">
+
+                    <button type="submit" class="btn link-btn">Post Comment ⇾</button>
+                </form>
+            </div>
+
+            
+            {% endif %}
+            {% endfor %}
+
+        </div>
+        {% endfor %}
+
+
+        <!-- <div class="media">
+            <div class="media-left">
+                <img src="{% static 'front/img/img_avatar1.png'%}" alt="" class="media-object">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Jahangir Alom <small>Posted on February 19, 2016</small></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <a href="#" class="btn link-btn btn-rounded">Reply ⇾</a>
+                <div class="media">
+                    <div class="media-left">
+                        <img src="{% static 'front/img/img_avatar2.png'%}" alt="Demo Avatar Jane Doe" class="media-object">
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Jane Doe <small>Posted on February 20, 2016</small></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <a href="#" class="btn link-btn btn-rounded">Reply ⇾</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    
+    <!-- comment form -->
+    <div class="comment_form2">
+        <h3 class="replay_title">Leave a Reply </h3>
+        <form action="{% url 'comments_add'%}" class='inline_login_form' method='POST' id='__w2_wHUAq3k520_login_form'>
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea class="form-control" id="CommentBody" name="CommentBody" rows="5"></textarea>
+            </div>
+            {% if 'container' not in request.session %}
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name *</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="CommentName" name="CommentName" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">Email *</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="CommentEmail" id="CommentEmail" type="text">
+                </div>
+            </div>
+            {% endif %}
+            <input type="text" class="hidden" id="news_pk" name="news_pk" value="{{pk}}">
+
+            <button type="submit" class="btn link-btn">Post Comment ⇾</button>
+        </form>
+    </div>
+    
+    <hr>
+
+
+    <!-- related post -->
+    <div class="post_related" style="padding-top: 50px;">
+        <h3 class="related_post_title">You Might Also Like...</h3>
+        <div class="container"  style="margin-top: -40px;">
+            <div class="row page-content">
+                <main class="col-sm-8 col-md-9 content p_r_40">
+                    <div class="media meida-md">
+                        <div class="media-left">
+                            <a href="#"><img src="{% static 'front/img/370x300-1.jpg'%}" class="media-object" alt=""></a>
+                        </div>
+                        <!-- /.Post image -->
+                        <div class="media-body">
+                            <div class="post-header">
+                                <div class="post-cat"><span>In</span> <a href="#">Lifestyle</a></div>
+                                <h3 class="media-heading"><a href="#">It is a long <em>established fact</em> that a reader will be distracted by the readable.</a></h3>
+                                <div class="entry-meta">
+                                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
+                                    <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                                </div>
+                                <!-- /.Post meta -->
+                            </div>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                            <div class="element-block">
+                                <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
+                                <!-- /.Post button -->
+                                <div class="post_share">
+                                    <a class="smedia facebook fa fa-facebook" href="#"></a>
+                                    <a class="smedia twitter fa fa-twitter" href="#"></a>
+                                    <a class="smedia googleplus fa fa-google-plus" href="#"></a>
+                                    <a class="smedia linkedin fa fa-linkedin" href="#"></a>
+                                    <a class="smedia pinterest fa fa-pinterest-p" href="#"></a>
+                                </div>
+                                <!-- /.Post social share -->
+                            </div>
+                        </div>
+                        </div>
+                        <div class="media meida-md">
+                        <div class="media-left">
+                            <a href="#"><img src="{% static 'front/img/370x300-2.jpg'%}" class="media-object" alt=""></a>
+                        </div>
+                        <!-- /.Post image -->
+                        <div class="media-body">
+                            <div class="post-header">
+                                <div class="post-cat"><span>In</span> <a href="#">Lifestyle</a></div>
+                                <h3 class="media-heading"><a href="#">It is a long <em>established fact</em> that a reader will be distracted by the readable.</a></h3>
+                                <div class="entry-meta">
+                                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
+                                    <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                                </div>
+                                <!-- /.Post meta -->
+                            </div>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                            <div class="element-block">
+                                <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
+                                <!-- /.Post button -->
+                                <div class="post_share">
+                                    <a class="smedia facebook fa fa-facebook" href="#"></a>
+                                    <a class="smedia twitter fa fa-twitter" href="#"></a>
+                                    <a class="smedia googleplus fa fa-google-plus" href="#"></a>
+                                    <a class="smedia linkedin fa fa-linkedin" href="#"></a>
+                                    <a class="smedia pinterest fa fa-pinterest-p" href="#"></a>
+                                </div>
+                                <!-- /.Post social share -->
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>    
+    </div>
+
+    <script>
+        // comment section script
+        $(".comment_form").hide()   
+    
+        $(document).ready(function(){
+            $(".btn.link-btn.btn-rounded").click(function(){
+                $(this).parent().parent().find(".comment_form").toggle()
+            });
+        });
+
+        // comment reply script : because of nested FOR loops and same parent div named MEDIA we can not use FIND thats why we used static NEXT
+        $(document).ready(function(){
+            $(".btn.link-btn.btn-rounded").click(function(){
+                $(this).parent().parent().next(".comment_form").toggle()
+            });
+        });
+
+    </script>
+
+</main>
+
+
+{% endblock %}
+
+
+
+{% block detail-bottom-scripts %}
+
+<script data-cfasync="false" src="{% static 'front/cloudflare-% static/email-decode.min.js' %}"></script><script src="{% static 'front/js/jquery.min.js' %}"></script>
+<script src="{% static 'front/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'front/js/animsition.min.js' %}"></script>
+<script src="{% static 'front/js/bootsnav.js'%}"></script>
+<script src="{% static 'front/js/macy.js' %}"></script>
+<script src="{% static 'front/js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static 'front/js/ResizeSensor.min.js'%}"></script>
+<script src="{% static 'front/js/theia-sticky-sidebar.min.js'%}"></script>
+<script src="{% static 'front/js/jquery.magnific-popup.min.js'%}"></script>
+<script src="{% static 'front/owl-carousel/owl.carousel.min.js'%}"></script>
+<script src="{% static 'front/js/modernizr.custom.js'%}"></script>
+<script src="{% static 'front/js/jquery.gridrotator.min.js'%}"></script>
+<script src="{% static 'front/js/parallax-background.min.js'%}"></script>
+<script src="{% static 'front/js/jquery.simpleSocialShare.min.js'%}"></script>
+<script src="{% static 'front/js/jquery.fluidbox.min.js'%}"></script>
+<script src="{% static 'front/js/retina.min.js'%}"></script>
+<script src="{% static 'front/js/jquery.shuffle.min.js'%}"></script>
+<script src="{% static 'front/js/readingTime.min.js'%}"></script>
+<script src="{% static 'front/js/custom.js' %}"></script>
+
+{% endblock %}

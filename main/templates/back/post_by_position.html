@@ -1,0 +1,326 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block headblock %}
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"> -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script> -->
+<!-- <script src="//cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/4.4.5.1/full-all/ckeditor.js"></script> -->
+{% endblock %}
+
+{% block mainblock %}
+<!-- Datatables Header -->
+
+
+<!-- show group list -->
+<div class="row">
+    <div class="col-md-12">
+
+            <!-- Masonry Home Posts -->
+            <div class="block full">
+    
+                <div class="block-title">
+                    <h2><strong>Masonry Home Posts</strong> List (One Each)</h2>
+                </div>
+
+                <div>
+                    <form action="{% url 'masonry_home_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <select name="item" id="item" class="select-chosen" placeholder="Add Item To {{i.name}}'s Dropdown" required>
+                                    <option></option>
+                                    {% for i in allnews %}
+                                        <option value="{{i.name}}">{{i.catname}} | {{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <select name="position" id="position" class="select-chosen" placeholder="Add Item To {{i.name}}'s Dropdown" required>
+                                    <option></option>
+                                        <option value="Main">Main</option>
+                                        <option value="Top_Left">Top_Left</option>
+                                        <option value="Top_Right">Top_Right</option>
+                                        <option value="Bottom_Left">Bottom_Left</option>
+                                        <option value="Bottom_Right">Bottom_Right</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                            </div>
+                                
+                        </div>
+                    </form>
+                </div>
+            
+                <div class="tab le-responsive">
+                    <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                    <table id="datatables" class="table table-vcenter table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Position</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for i in masonryhome %}              
+                                <tr>
+                                    <td class="text-center">{{i.pk}}</td>
+                                    <td class="text-center"><img style="display: inline-block; height: 50px; width: 50px;" src={{i.picurl}} alt="avatar" class="img-circle"></td>
+                                    <td>{{i.name}}</td>
+                                    <td class="text-center">{{i.position}}</td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{% url 'masonry_home_delete' pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>  
+                    </table>
+                    
+                </div>
+            </div>
+
+
+ 
+            <!-- Featured Post Home on Right -->
+            {% for i in category %}
+            <div class="block full">
+               
+                <div class="block-title">
+                    <h2><strong>{{i.name}} - Featured Posts</strong> List (Only 1)</h2>
+                </div>
+
+                <div>
+                    <form action="{% url 'featured_home_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <select name="item" id="item" class="select-chosen" placeholder="Add Item To {{i.name}}'s Dropdown" required>
+                                    <option></option>
+                                    {% for j in allnews %}
+                                    {% if i.name == j.catname %}
+                                        <option value="{{j.name}}">{{j.name}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <select name="position" id="position" class="select-chosen" placeholder="Add Item To {{i.name}}'s Dropdown" required>
+                                    <option></option>
+                                        <option value="Main">Main</option>
+                                        <option value="General">General</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                            </div>
+                             
+                        </div>
+                    </form>
+                </div>
+            
+                <div class="tab le-responsive">
+                    <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                    <table id="datatables" class="table table-vcenter table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Position</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for j in featuredhome %} 
+                            {% if i.name == j.catname %}             
+                                <tr>
+                                    <td class="text-center">{{j.pk}}</td>
+                                    <td class="text-center"><img style="display: inline-block; height: 50px; width: 50px;" src={{j.picurl}} alt="avatar" class="img-circle"></td>
+                                    <td>{{j.name}}</td>
+                                    <td class="text-center">{{j.position}}</td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{% url 'featured_home_delete' pk=j.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>  
+                    </table>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+
+
+            <!-- Most Viewed Posts on Right -->
+            <div class="block full">
+               
+                <div class="block-title">
+                    <h2><strong>Most Viewed Posts</strong> List (As Many As You Wish)</h2>
+                </div>
+
+                <div>
+                    <form action="{% url 'most_viewed_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-5">
+                                <select name="item" id="item" class="select-chosen" placeholder="Add Item To {{i.name}}'s Dropdown" required>
+                                    <option></option>
+                                    {% for i in allnews %}
+                                        <option value="{{i.name}}">{{i.catname}} | {{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                            </div>
+                             
+                        </div>
+                    </form>
+                </div>
+            
+                <div class="tab le-responsive">
+                    <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                    <table id="datatables" class="table table-vcenter table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for i in mostviewed %}              
+                                <tr>
+                                    <td class="text-center">{{i.pk}}</td>
+                                    <td class="text-center"><img style="display: inline-block; height: 50px; width: 50px;" src={{i.picurl}} alt="avatar" class="img-circle"></td>
+                                    <td>{{i.name}}</td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{% url 'most_viewed_delete' pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>  
+                    </table>
+                    
+                </div>
+            </div>
+
+
+                       
+            <!-- Heading Dropdown Posts  -->
+            {% for i in category %}
+            <div class="block full">
+               
+                <div class="block-title">
+                    <h2><strong>{{i.name}} -</strong> Heading Dropdown List (5 posts)</h2>
+                </div>
+
+                <div>
+                    <form action="{% url 'heading_dropdown_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-5">
+                                <select name="item" id="item" class="select-chosen" placeholder="Add Item To {{i.name}}'s Dropdown" required>
+                                    <option></option>
+                                    {% for j in allnews %}
+                                    {% if i.name == j.catname %}
+                                        <option value="{{j.name}}">{{j.name}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                            </div>
+                             
+                        </div>
+                    </form>
+                </div>
+            
+                <div class="tab le-responsive">
+                    <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                    <table id="datatables" class="table table-vcenter table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for k in dropdown %}
+                            {% if i.name == k.catname %}                  
+                                <tr>
+                                    <td class="text-center">{{k.pk}}</td>
+                                    <td><img style="display: inline-block; height: 50px; width: 50px;" src={{k.picurl}} alt="avatar" class="img-circle"></td>
+                                    <td class="text-center">{{k.name}}</td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{% url 'heading_dropdown_delete' pk=k.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>  
+                    </table>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <script>
+        $(document).ready(function() {
+        $('.table, .table-vcenter, .table-condensed, .table-bordered').DataTable();
+    } );
+    </script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <!-- <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+{% endblock %}

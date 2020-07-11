@@ -1,0 +1,135 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block headblock %}
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"> -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script> -->
+<!-- <script src="//cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/4.4.5.1/full-all/ckeditor.js"></script> -->
+{% endblock %}
+
+{% block mainblock %}
+<!-- Datatables Header -->
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Pictures-Gallery<br><small>You can manage pictures at the bottom here.</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Panel</li>
+    <li><a href="/panel/settings/pictures">Pictures</a></li>
+</ul>
+
+<!-- add group -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+                <h2><strong>Pictures</strong> Add</h2>
+            </div>
+            <!-- END Form Elements Title -->
+ 
+            <!-- Basic Form Elements Content -->
+            <form action="{% url 'pictures_gallery_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+               {% csrf_token %}
+                <div class="form-group">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <input id="myfile" name="myfile" type="file" rows="5" class="form-control" placeholder="select file" required>
+                    </div>
+                    <div class="col-md-5">
+                        <input id="given_name" name="given_name" type="text" rows="5" class="form-control" placeholder="Enter Name" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                    </div>
+                </div> -->
+
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+</div>
+
+<!-- show group list -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+       
+           
+            <div class="block full">
+                <div class="block-title">
+                    <h2><strong>Group</strong> List</h2>
+                </div>
+            
+                <div class="tab le-responsive">
+                    <!-- <input type="text" name="" id="myInput" placeholder="search here"> -->
+                    <table id="datatable" class="table table-vcenter table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Picture</th>
+                                <th class="text-center">Picture-Name</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for i in pictures_gallery %}                  
+                                <tr>
+                                    <th class="text-center">{{i.pk}}</th>
+                                    <td class="text-center"><img style="display: inline-block; height: 50px; width: 50px;" src={{i.picurl}} alt="avatar" class="img-circle"></td>
+                                    <td class="text-center">{{i.givenname}}</td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{% url 'pictures_gallery_delete' pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>  
+                    </table>
+                    
+                </div>
+            </div>
+
+        <!-- END Basic Form Elements Block -->
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <script>
+        $(document).ready(function() {
+        $('#datatable').DataTable();
+    } );
+    </script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <!-- <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+{% endblock %}

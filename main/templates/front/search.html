@@ -1,0 +1,159 @@
+{% extends 'front/master.html' %}
+
+{% load static %}
+
+
+{% block search-head-references %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>OSRU - News, Blog & Magazine HTML Template</title>
+<link href="{% static 'front/img/favicon.png' %}" rel="icon">
+<link href="{% static 'front/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'front/css/animsition.min.css' %}" rel="stylesheet">
+<link href="{% static 'front/css/font-awesome.min.css' %}" rel="stylesheet">
+<link href="{% static 'front/themify-icons/themify-icons.css' %}" rel="stylesheet">
+<link href="{% static 'front/css/bootsnav.css' %}" rel="stylesheet">
+<link href="{% static 'front/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+<link href="{% static 'front/owl-carousel/owl.theme.css' %}" rel="stylesheet">
+<link href="{% static 'front/owl-carousel/owl.transitions.css' %}" rel="stylesheet">
+<link href="{% static 'front/css/magnific-popup.css' %}" rel="stylesheet">
+<link href="{% static 'front/css/fluidbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'front/css/style.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block search-main-posts %}
+
+<main class="col-sm-8 col-md-9 content p_r_40">
+    <div id="macy-container">
+        {% for i in news %}
+        <article class="grid_post">
+            <figure>
+                <a href="#" class="grid_image">
+                    <img src="{{i.picurl}}" class="img-responsive" alt="">
+                </a>
+                <figcaption>
+                    <div class="post-cat"><a href="#">Fashion</a></div>
+                    <div class="entry-meta">
+                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
+                        <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                    </div>
+                    <h4 class="grid_post_title"><a href="#">There are <em>many variations</em> of passages of Lorem Ipsum available</a></h4>
+                    <div class="element-block">
+                        <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
+                        <!-- /.Post button -->
+                        <div class="post_share">
+                            <a class="smedia facebook fa fa-facebook" href="#"></a>
+                            <a class="smedia twitter fa fa-twitter" href="#"></a>
+                            <a class="smedia googleplus fa fa-google-plus" href="#"></a>
+                        </div>
+                        <!-- /.Post social share -->
+                    </div>
+                </figcaption>
+            </figure>
+        </article>
+        {% endfor %}
+        
+    </div>
+    <!-- <ul class="pagination">
+        <li class="disabled"><a href="#">&#8701;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li class="page-numbers"><span>...</span></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&#8702;</a></li>
+    </ul> -->
+    <!-- /.End of pagination -->
+
+    <!-- {{ news.number }}  == current page number
+
+    {{ news.paginator }} => {{ news.paginator.count }}        == totat objects in paginator object
+                         => {{ news.paginator.num_pages }}    == total number of pages in paginator object
+                         => {{ news.paginator.page_range }}   == iterator which is first object to last object in paginator object -->
+
+    {% if news.has_other_pages %}
+        <ul class="pagination">
+            {% if news.has_previous %}
+                <li><a href="?page={{ news.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+
+            <!-- i can not do (news.number-5 > 1) thats why i did (news.number|add:'-3' > 1) -->
+            {% if news.has_previous and news.number|add:'-4' > 1 %} 
+                <li><a href="?page=1">1</a></li>
+                <li class="page-numbers"><span>...</span></li>
+            {% endif %}
+
+            {% for i in news.paginator.page_range %}
+            {% if news.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% elif i >= news.number|add:'-3' and i <= news.number  %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if news.has_next %}
+                <li class="page-numbers"><span>...</span></li>
+                <li><a href="?page={{ last }}">{{ last }}</a></li>
+            {% endif %}
+
+            {% if news.has_next %}
+                <li><a href="?page={{ news.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</main>
+
+{% endblock %}
+
+
+
+{% block search-bottom-scripts %}
+
+<script data-cfasync="false" src="{% static 'front/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'front/js/jquery.min.js' %}"></script>
+<script src="{% static 'front/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'front/js/animsition.min.js' %}"></script>
+<script src="{% static 'front/js/bootsnav.js' %}"></script>
+<script src="{% static 'front/js/macy.js' %}"></script>
+<script src="{% static 'front/js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'front/js/ResizeSensor.min.js' %}"></script>
+<script src="{% static 'front/js/theia-sticky-sidebar.min.js' %}"></script>
+<script src="{% static 'front/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'front/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'front/js/modernizr.custom.js' %}"></script>
+<script src="{% static 'front/js/jquery.gridrotator.min.js' %}"></script>
+<script src="{% static 'front/js/parallax-background.min.js' %}"></script>
+<script src="{% static 'front/js/jquery.simpleSocialShare.min.js' %}"></script>
+<script src="{% static 'front/js/jquery.fluidbox.min.js' %}"></script>
+<script src="{% static 'front/js/retina.min.js' %}"></script>
+<script src="{% static 'front/js/jquery.shuffle.min.js' %}"></script>
+<script src="{% static 'front/js/readingTime.min.js' %}"></script>
+<script src="{% static 'front/js/custom.js' %}"></script>
+<script>
+    var masonry = new Macy({
+        container: '#macy-container',
+        trueOrder: false,
+        waitForImages: false,
+        useOwnImageLoader: false,
+        debug: true,
+        mobileFirst: true,
+        columns: 1,
+        margin: 30,
+        breakAt: {
+            1200: 3,
+            992: 3,
+            768: 2,
+            480: 2
+        }
+    });
+</script>
+
+{% endblock %}
