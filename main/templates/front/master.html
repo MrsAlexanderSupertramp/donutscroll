@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load extra_auth %}
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -77,14 +79,17 @@
             <div class="top-header dark">
                 <div class="container">
                     <div class="row">
+                        <!-- about and contact -->
                         <div class="col-sm-6 col-md-7">
                             <div class="header-nav">
                                 <ul>
                                     <li><span class="headre-weather"><i class="fa fa-calendar-check-o"></i>&nbsp; {{today}}</span></li>
                                     <li><a href="{% url 'about' %}">About</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
+                        <!-- social share and temp -->
                         <div class="col-sm-6 col-md-5">
                             <ul class="top-socia-share">
                                 <li>
@@ -93,9 +98,6 @@
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                     <a href="#"><i class="fa fa-linkedin"></i></a>
                                     <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'mylogin' %}">Login</a>
                                 </li>
                                 <li>
                                     <div class="weather-top">
@@ -118,27 +120,27 @@
             <!-- navigation -->
             <nav class="navbar navbar-inverse navbar-sticky navbar-mobile bootsnav">
                 <div class="container">
+                    <!-- Side drawer -->
                     <div class="attr-nav">
                         <ul>
                             <li class="side-menu"><a href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
-                            <li id="btn-search1"><a href="javascript:void(0)" id="btn-search2"><i class="fa fa-search"></i></a></li>
+                            <li id="btn-search1"><a href="javascript:void(0)" id="btn-search2"></a></li>
             
                         </ul>
                     </div>
-                    <!-- End Atribute Navigation -->
-                    <!-- Start Header Navigation -->
+
+                    <!-- Logo -->
                     <div class="navbar-header">
-                       
-                        <a class="navbar-brand" href="index.html"><img src="{% static 'front/img/logo-white.png' %}" class="logo" alt=""></a>
+                        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'front/img/logo.png' %}" class="img-responsive logo" alt=""></a>
                     </div>
-                    <!-- End Header Navigation -->
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="navbar-menu">
+
+                    <!-- Navbar -->
+                    <div class="collapse navbar-collapse" id="navbar-menu" style="margin-left: 260px;">
                         <ul class="nav navbar-nav navbar-center" data-in="navFadeInDown" data-out="navFadeOutUp">
                             <!-- video-section -->
                             {% for i in category %}
                             <li class="dropdown megamenu-fw megamenu-video">
-                                <a href="#" class="dropdown-toggle">{{i.name}}</a>
+                                <a href="{% url 'news_section' name=i.name %}" class="dropdown-toggle">{{i.name}}</a>
                                 <ul class="dropdown-menu megamenu-content" role="menu">
                                     <li>
                                         <div class="row m_0">
@@ -146,10 +148,10 @@
                                             {% if j.catname == i.name %}
                                             <div class="col-menu-video col-md-3">
                                                 <article class="post_article">
-                                                    <a class="post_img" href="details-video.html">
-                                                        <figure><img  style="width: 200px; height: 145px;" class="img-responsive" alt="" src="{{j.picurl}}"></figure>        
+                                                    <a class="post_img" href="{% url 'news_detail' name=j.name cat=j.catname %}">
+                                                        <figure><img  style="widows: 100%; height: 140px; object-fit: cover;" class="img-responsive" alt="" src="{{j.picurl}}"></figure>        
                                                     </a>
-                                                    <h4><a href="details-video.html">{{j.name}}</a></h4>
+                                                    <h4><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{j.name}}</a></h4>
                                                 </article>
                                             </div><!-- end col-3 -->
                                             {% endif %}
@@ -159,8 +161,6 @@
                                 </ul>
                             </li>
                             {% endfor %}
-
-                            <li><a href="contact.html">Contact</a></li>
 
                         </ul>
                     </div> 
@@ -172,7 +172,7 @@
                         <h3 class="widget-title"><strong>Menu</strong></h3>
                         <ul class="link">
                             {% for i in category %}
-                            <li><a href="about-me.html">{{i.name}}</a></li>
+                            <li><a href="{% url 'news_section' name=i.name %}">{{i.name}}</a></li>
                             {% endfor %}
                             <li><a href="{% url 'about' %}">About</a></li>
                         </ul>
@@ -199,10 +199,11 @@
                 <button id="btn-search-close" class="btn btn--search-close" aria-label="Close search form"> <i class="ti-close"></i></button>
                 <form action="{% url 'news_search' %}" class="search__form" action="javascript:void(0)" method="post">
                     {% csrf_token %}
-                    <input class="search__input" name="search" type="search"  placeholder="Search and hit enter..."/>
+                    <input class="search__input" name="search" id="search" type="search"  placeholder="Search and hit enter..."/>
                     <span class="search__info">Hit enter to search or ESC to close</span>
+                    <button type="submit">submit</button>
                 </form>
-                <div class="search__related">
+                <!-- <div class="search__related">
                     <div class="search__suggestion">
                         <h3>May We Suggest?</h3>
                         <p>#drone #funny #catgif #broken #lost #hilarious #good #red #blue #nono #why #yes #yesyes #aliens #green</p>
@@ -215,7 +216,7 @@
                         <h3>Needle, Where Art Thou?</h3>
                         <p>#broken #lost #good #red #funny #hilarious #catgif #blue #nono #why #yes #yesyes #aliens #green #drone</p>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- top-trending-slider -->
@@ -223,7 +224,7 @@
                 <div class="newstricker_inner">
                     <div class="trending"><strong>Trending</strong> Now</div>
                         <div id="newsTicker" class="owl-carousel owl-theme">
-                            {% for i in newstrend %}
+                            {% for i in trending %}
                             <div class="item">
                                 <a href="#">{{i.name}}.</a>
                             </div>
@@ -317,13 +318,13 @@
 
                                 {% for i in most_viewed %}
                                 <div class="media latest_post">
-                                    <a class="media-left" href="#">
+                                    <a class="media-left" href="{% url 'news_detail' name=j.name cat=j.catname %}">
                                         <img src="{{i.picurl}}" class="media-object" alt="">
                                     </a>
                                     <div class="media-body">
-                                        <h6 class="media-heading"><a href="#">{{i.name}}</a></h6>
+                                        <h6 class="media-heading"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{i.name}}</a></h6>
                                         <div class="entry-meta">
-                                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{i.date}}</time></span>
+                                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span>
                                         </div>
                                     </div>
                                 </div>
@@ -405,44 +406,20 @@
                 <div class="main-footer">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-4 col-md-4">
+                            <div class="col-sm-4 col-md-5" style="float: left; margin-top: -20px;">
                                 <div class="footer-box">
                                     <div class="footer-logo">
-                                        <img src="{% static 'front/img/logo-white.png' %}" class="img-responsive" alt="">
+                                        <img src="{% static 'front/img/logo.png' %}" class="img-responsive" alt="">
                                     </div>
-                                    <p>It is a long established fact that a reader<br>
-                                        will be distracted by the readable content of<br>
-                                        a page when looking at its layout. The point<br>
-                                        of using Lorem Ipsum</p>
-                                    <div class="textwidget"><p>457 BIgBlue Street, Suite 4A<br>
-                                            New York, NY 10013<br>
-                                            <span>(315) 5512-2579</span><br>
-                                            <!--<a href="mailto:info@example.com">info@example.com</a>-->
-                                        </p>
-                                    </div>
-                                    <p>Contact us on <a href="https://osruhtml.bdtask.com/cdn-cgi/l/email-protection#61080f070e210419000c110d044f020e0c"><strong><span class="__cf_email__" data-cfemail="254c4b434a65405d44485549400b464a48">[email&#160;protected]</span></strong></a></p> 
+                                    <p>To make your visit amazing we are trying our<br>
+                                        best to provide amazing, trending content<br>
+                                        written by our most amazing and hard-working<br>
+                                        writers, Do enjoy your time here.</p> <br>
+                                    <p>Mail us on :&nbsp; &nbsp; <a href="#"><strong><span class="__cf_email__">teamdonutscroll@donutscroll.com</span></strong></a></p> 
+                                    <p>Call us on &nbsp; :&nbsp; &nbsp;<a href="#"><strong><span class="__cf_email__">(+91 8849904104)</span></strong></a></p> 
                                 </div>
                             </div>
-                            <div class="hidden-sm col-md-3">
-                                <div class="footer-box">
-                                    <h3 class="widget-title title-white">Twitter</h3>
-                                    <ul class="twitter-widget">
-                                        <li>
-                                            <div class="icon"><i class="ti-twitter"></i></div>
-                                            <div class="tweet-text">
-                                                So proud to have become an <a target="_blank" href="#">@envato</a> Power Elite author. Drop our #ThemeForest: <a target="_blank" href="#">https://t.co/jGyLLggygN</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="icon"><i class="ti-twitter"></i></div>
-                                            <div class="tweet-text">
-                                                So proud to have become an <a target="_blank" href="#">@envato</a> Power Elite author. Drop out our #ThemeForest: <a target="_blank" href="#">https://t.co/jGyLLggygN</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-md-2">
+                            <div class="col-sm-3 col-md-2" >
                                 <div class="footer-box">
                                     <h3 class="widget-title title-white">Need help</h3>
                                     <ul class="footer-cat">
@@ -454,24 +431,22 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-sm-5 col-md-3">
+                            <div class="col-sm-5 col-md-4" style="float: right;">
                                 <div class="footer-box">
                                     <h3 class="widget-title title-white">Latest Post</h3>
                                     <!-- /.latest post -->
-                                    {% for i in news %}
-                                    {% if i.identifier_home == "Aside" %}
+                                    {% for i in 3|bottom_news %}
                                     <div class="media latest_post">
-                                        <a class="media-left" href="#">
+                                        <a class="media-left" href="{% url 'news_detail' name=j.name cat=j.catname %}">
                                             <img src="{{i.picurl}}" class="media-object" alt="">
                                         </a>
                                         <div class="media-body">
-                                            <h6 class="media-heading"><a href="#">{{i.name}}</a></h6>
+                                            <h6 class="media-heading"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{i.name}}</a></h6>
                                             <div class="entry-meta">
                                                 <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span>
                                             </div>
                                         </div>
                                     </div>
-                                    {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -479,7 +454,7 @@
                     </div>
                 </div>
                 <div class="sub-footer">
-                    Copyright � 2017 by Bdtask. All Rights Reserved.
+                    © DonutScroll,&nbsp;&nbsp; All Rights Reserved. &nbsp;&nbsp;&nbsp;&nbsp;"Crafted by Onewebsolutions."
                 </div>
             </footer>
         </div>

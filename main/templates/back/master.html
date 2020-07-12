@@ -2,6 +2,7 @@
 
 {% load extra_auth %}
 
+
 {% if user.is_authenticated %}
 
 <!DOCTYPE html>
@@ -159,10 +160,6 @@
                                         <li>
                                             <a href="/panel/news/list">News List</a>
                                         </li>
-
-                                        <li>
-                                            <a href="/panel/news/list-position-home">News List by Position-Home</a>
-                                        </li> 
                                     </ul>
                                 </li>
 
@@ -179,6 +176,11 @@
                                     </ul>
                                 </li>
 
+                                <!-- Category Section -->
+                                <li class="sidebar-header">
+                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                    <span class="sidebar-header-title">Category</span>
+                                </li>    
                                 {% if request.user|has_group:"masteruser" %}
                                 <!-- category -->
                                 <li>
@@ -192,20 +194,8 @@
                                         </li> 
                                     </ul>   
                                 </li>
-
-                                <!-- Singular Manager -->
-                                <li>
-                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Singular-Manager</span></a>
-                                    <ul>
-                                        <li>
-                                            <a href="/panel/singular_manager/trending/list">Trending List</a>
-                                        </li> 
-                                        <li>
-                                            <a href="/panel/singular_manager/identifier_home/list">Identifier</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 {% endif %}
+
 
                                 <!-- Newsletter Section -->
                                 <li class="sidebar-header">
@@ -224,7 +214,9 @@
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
                                     <span class="sidebar-header-title">Settings</span>
                                 </li>
-
+                                <li>
+                                    <a href="/panel/settings/trending/list"><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"></span>Trending List</span></a>
+                                </li> 
                                 <li>
                                     <a href="/panel/settings/postbyposition" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Post By Position</span></a>
                                 </li>
@@ -367,4 +359,5 @@
 
     </body>
 </html>
+
 {% endif %}

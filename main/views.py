@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Main, HeadingDropdown, MostViewed, FeaturedHome, MasonryHome, PicturesGallery, ExtraPages
+from .models import Main, HeadingDropdown, MostViewed, FeaturedHome, MasonryHome, PicturesGallery, ExtraPages, Trending
 from news.models import News
 from category.models import Category
 from comments.models import Comments
@@ -23,8 +23,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 def home(request):
-
-    site = Main.objects.get(pk=2)
+    
     category  = Category.objects.all()
     news = News.objects.all()
 
@@ -52,8 +51,7 @@ def home(request):
     featuredhome = FeaturedHome.objects.all()
     masonryhome = MasonryHome.objects.all()
     pictures_gallery = PicturesGallery.objects.all()
-
-    newstrend = News.objects.filter(trending=True)
+    trending = Trending.objects.all()
 
     # Temperature
     # ip, is_routable = get_client_ip(request)
@@ -70,7 +68,7 @@ def home(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(round(json_data['main']['temp'] - 273.15, 1), 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -90,10 +88,9 @@ def home(request):
     today = str(weekday) + " , " + str(month) + " " + str(day)
 
     dictionary = {
-        'site' : site,
         'news': news, 
         'category': category, 
-        'newstrend': newstrend, 
+        'trending': trending, 
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "featuredhome": featuredhome,
@@ -115,10 +112,8 @@ def news_search(request):
 
         search = request.POST.get('search')
 
-        
-    site = Main.objects.get(pk=2)
     category  = Category.objects.all()
-    newstrend = News.objects.filter(trending=True)
+    trending = Trending.objects.all()
     allnews = News.objects.all()
 
     newshead = []
@@ -128,18 +123,6 @@ def news_search(request):
         for j in newss:
             newshead.append(j)
 
-    newstrend = News.objects.filter(trending=True)
-
-    # search_name = News.objects.filter(name__contains=search)
-    # search_intro_text = News.objects.filter(intro_text__contains=search)
-    # search_body_text = News.objects.filter(body_text__contains=search)
-
-    # newss = list(chain(search_name, search_intro_text, search_body_text))
-    # newss = list(dict.fromkeys(newss))
-    # newss.reverse()
-
-    newss = News.objects.all()
-    search = request.POST.get('search')
 
     if search :
         newss = News.objects.filter(
@@ -158,6 +141,12 @@ def news_search(request):
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
 
+    for i in news:
+        print(i.name)
+
+    for i in newss:
+        print(i.name)
+
     # Temperature
     city = 'Delhi'
 
@@ -167,7 +156,7 @@ def news_search(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -185,30 +174,35 @@ def news_search(request):
     today = str(weekday) + " , " + str(month) + " " + str(day)
 
     dictionary = {
-        'site' : site,
-        'news': allnews, 
+        'news': news, 
         'category': category, 
-        'newstrend': newstrend, 
         'newshead': newshead,
+        'trending': trending,
         'last': last,
         'temp': temp,
         'city': city,
         'today': today,
     }
 
+    for i in News.objects.all():
+        print(i.name)
+
 
 
     return render(request, 'front/search.html', dictionary)
     
 
-def news_detail(request, pk):
+def news_detail(request, name, cat):
 
-    site = Main.objects.get(pk=2)
     category  = Category.objects.all()
-    newstrend = News.objects.filter(trending=True)
-
     news = News.objects.all()
-    comments = Comments.objects.filter(news_id=pk)
+    news_details = News.objects.get(name=name)
+    comments = Comments.objects.filter(news_id=news_details.pk)
+    trending = Trending.objects.all()
+    heading_posts = HeadingDropdown.objects.all()
+    most_viewed = MostViewed.objects.all()
+    related_posts = News.objects.filter(catname=news_details.catname).order_by('-pk')[: 7]
+    pictures_gallery = PicturesGallery.objects.all()
 
 
     replies = []
@@ -229,8 +223,6 @@ def news_detail(request, pk):
 
     comments_count = comments.count() + len(replies)
 
-    news_details = News.objects.get(pk=pk)
-
 
     # Temperature
     city = 'Delhi'
@@ -241,7 +233,7 @@ def news_detail(request, pk):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()   
@@ -259,19 +251,21 @@ def news_detail(request, pk):
     today = str(weekday) + " , " + str(month) + " " + str(day)
 
     dictionary = {
-        'site' : site,
         'news': news, 
         'category': category, 
-        'newstrend': newstrend, 
-        'newshead': newshead,
+        'trending': trending, 
+        'heading_posts': heading_posts,
+        'most_viewed': most_viewed,
         'news_details': news_details, 
+        "pictures_gallery": pictures_gallery,
         'comments': comments, 
         'comments_reply': replies, 
         'comments_count': comments_count, 
-        'pk':pk,
+        'pk': news_details.pk,
         'temp': temp,
         'city': city,
         'today': today,
+        'related_posts': related_posts,
     }
 
     return render(request, 'front/news_detail.html', dictionary)
@@ -403,23 +397,18 @@ def comments_reply_add(request):
             return render(request, 'front/error.html', {'error': error})
 
 
-def news_section(request):
-    site = Main.objects.get(pk=2)
+def news_section(request, name):
     category  = Category.objects.all()
-    newstrend = News.objects.filter(trending=True)
+    trending = Trending.objects.all()
+    most_viewed = MostViewed.objects.all()
+    pictures_gallery = PicturesGallery.objects.all()
 
-    newshead = []
+    heading_posts = HeadingDropdown.objects.all()
 
-    for i in category:
-        newss = News.objects.filter(catname = i.name).order_by("pk").reverse()[:5]
-        for j in newss:
-            newshead.append(j)
 
-    newstrend = News.objects.filter(trending=True)
-
-    newss = News.objects.all()
+    newss = News.objects.filter(catname=name).order_by("-pk")
     page = request.GET.get('page')
-    paginator = Paginator(newss,9)
+    paginator = Paginator(newss,12)
     last = paginator.num_pages
     
     try:
@@ -439,7 +428,7 @@ def news_section(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -457,18 +446,17 @@ def news_section(request):
     today = str(weekday) + " , " + str(month) + " " + str(day)
 
     dictionary = {
-        'site' : site,
         'news': news, 
         'category': category, 
-        'newstrend': newstrend, 
-        'newshead': newshead,
+        'trending': trending, 
+        'heading_posts': heading_posts,
+        'most_viewed': most_viewed,
+        "pictures_gallery": pictures_gallery,
         'last': last,
         'temp': temp,
         'city': city,
         'today': today,
     }
-
-
 
     return render(request, 'front/news_section.html', dictionary)
 
@@ -625,7 +613,7 @@ def error(request) :
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -764,6 +752,36 @@ def masonry_home_delete(request, pk) :
     return redirect('post_by_position')
 
 
+
+def trending_list(request):
+
+    if request.method == 'POST' :
+
+        name = request.POST.get('name')
+
+        obj = Trending(name=name)
+        obj.save()
+
+
+    allnews = News.objects.all().order_by("-pk")
+    trending = Trending.objects.all()
+
+    dictionary = {
+        "allnews": allnews,
+        "trending": trending,
+    }
+
+    return render(request, 'back/trending_list.html', dictionary)
+
+
+def trending_remove(request, pk) :
+
+    obj = Trending.objects.get(pk=pk)
+    obj.delete()
+
+    return redirect('trending_list')
+
+
 def pictures_gallery(request):
 
     pictures_gallery = PicturesGallery.objects.all()
@@ -828,8 +846,8 @@ def about(request):
 
     most_viewed = MostViewed.objects.all()
     pictures_gallery = PicturesGallery.objects.all()
-
-    newstrend = News.objects.filter(trending=True)
+    content = ExtraPages.objects.get(pagename="About")
+    trending = Trending.objects.all() 
 
     city = 'Delhi'
 
@@ -839,7 +857,7 @@ def about(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -860,16 +878,19 @@ def about(request):
 
     dictionary = {
         'category': category, 
-        'newstrend': newstrend, 
+        'trending': trending, 
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
+        'content': content,
         "pictures_gallery": pictures_gallery,
         'temp': temp,
         'city': city,
         'today': today,
     }
 
-    return render(request, 'front_extra/about.html', dictionary)
+    print(content)
+
+    return render(request, 'front_extra/contact.html', dictionary)
 
 
 def contact(request):
@@ -885,9 +906,7 @@ def contact(request):
     most_viewed = MostViewed.objects.all()
     pictures_gallery = PicturesGallery.objects.all()
     content = ExtraPages.objects.get(pagename="Contact Us")
-
-
-    newstrend = News.objects.filter(trending=True)
+    trending = Trending.objects.all()
 
     city = 'Delhi'
 
@@ -897,7 +916,7 @@ def contact(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -918,7 +937,7 @@ def contact(request):
 
     dictionary = {
         'category': category, 
-        'newstrend': newstrend, 
+        'trending': trending, 
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
@@ -927,6 +946,7 @@ def contact(request):
         'city': city,
         'today': today,
     }
+
 
     return render(request, 'front_extra/contact.html', dictionary)
 
@@ -954,7 +974,7 @@ def copyright(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1010,7 +1030,7 @@ def privacy_policy(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1066,7 +1086,7 @@ def cookie_policy(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1122,7 +1142,7 @@ def terms_of_service(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1178,7 +1198,7 @@ def diversity_and_corrections_policy(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1234,7 +1254,7 @@ def ownership(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1290,7 +1310,7 @@ def ethics_policy(request):
     source = urllib.request.urlopen(url).read()
 
     json_data = json.loads(source)
-    temp = json_data['main']['temp'] - 273.15
+    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()

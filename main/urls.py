@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
-    url(r'^news/news_details/(?P<pk>\d+)/$', views.news_detail, name="news_detail"),
-    url(r'^news_section/$', views.news_section, name="news_section"),
+    url(r'^(?P<cat>.*)/(?P<name>.*)/$', views.news_detail, name="news_detail"),
+    url(r'^(?P<name>.*)/$', views.news_section, name="news_section"),
     url(r'^panel/$', views.panel, name="panel"),
     url(r'^login/$', views.mylogin, name="mylogin"),
     url(r'^register/$', views.myregister, name="myregister"),
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^comment/reply/add/$', views.comments_reply_add, name="comments_reply_add"),
     url(r'^search/$', views.news_search, name="news_search"),
     url(r'^error/$', views.error, name="error"),
+
     url(r'^panel/settings/postbyposition/$', views.post_by_position, name="post_by_position"),
     url(r'^panel/settings/dropdown/add/$', views.heading_dropdown_add, name="heading_dropdown_add"),
     url(r'^panel/settings/dropdown/delete/(?P<pk>\d+)/$', views.heading_dropdown_delete, name="heading_dropdown_delete"),
@@ -30,6 +31,9 @@ urlpatterns = [
     url(r'^panel/settings/extrapages/add/$', views.extra_pages_add, name="extra_pages_add"),
     url(r'^panel/settings/extrapages/delete/(?P<pk>\d+)/$', views.extra_pages_delete, name="extra_pages_delete"),
     url(r'^panel/settings/extrapages/content/(?P<pk>\d+)/$', views.extra_pages_content, name="extra_pages_content"),
+    url(r'^panel/settings/trending/list/$', views.trending_list, name='trending_list'),
+    url(r'^panel/settings/trending/remove/(?P<pk>\d+)$', views.trending_remove, name='trending_remove'),
+
     url(r'^about/$', views.about, name="about"),
     url(r'^contact/$', views.contact, name="contact"),
     url(r'^copyright-policy/$', views.copyright, name="copyright"),

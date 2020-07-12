@@ -2,8 +2,6 @@
 
 {% load static %}
 
-
-
 {% block detail-head-references %}
 
 <meta charset="utf-8">
@@ -41,12 +39,11 @@
                 <h2>{{news_details.name | safe}}</h2>
                 <div class="element-block">
                     <div class="entry-meta">
-                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
-                        <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                        &nbsp;&nbsp;<span class="" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; padding-top: 10px;"><i class="fa fa-calendar-o" aria-hidden="true">&nbsp;&nbsp;</i>{{today}} &nbsp;&nbsp; | &nbsp;&nbsp; DonutScroll</span> 
                     </div>
                     <div class="reading-time"><span class="eta"></span> (<span class="words"></span> words)</div>
                     <figure>    
-                        <img src="{{news_details.picurl}}" alt="" class="aligncenter img-responsive">
+                        <img src="{{news_details.picurl}}" alt="" class="aligncenter img-responsive" style="width: 100%; padding-top: 20px;">
                     </figure>
                 </div>
             </header>
@@ -58,29 +55,7 @@
 
     </div>
     <!-- /.End of details body -->
-    <aside class="about-author">
-        <h3>About The Author</h3>
-        <div class="author-bio">
-            <div class="author-img">
-                <a href="#"><img alt="Johnny Doe" src="{% static 'front/img/about-avatar.jpg'%}" class="avatar img-responsive"></a>												
-            </div>
-            <!-- /. Author-img -->
-            <div class="author-info">
-                <h4 class="author-name">Johnny Doe</h4>
-                <p>Johnny Doe was born in Ulm, in the Kingdom of Württemberg in the German Empire on 14 March 1879. His father was Hermann Einstein, a salesman and engineer. He was a really good man for sure.</p>
-                <p>
-                    <a class="social-link facebook" href="#"><i class="fa fa-facebook"></i></a>
-                    <a class="social-link twitter" href="#"><i class="fa fa-twitter"></i></a>
-                    <a class="social-link vine" href="#"><i class="fa fa-vine"></i></a>
-                    <a class="social-link dribbble" href="#"><i class="fa fa-dribbble"></i></a>
-                    <a class="social-link instagram" href="#"><i class="fa fa-instagram"></i></a>
-                </p>
-            </div>
-            <!-- /. Author-info -->
-        </div>
-        <!-- /.End of author bio -->
-    </aside>
-    <!-- /.End of about author -->
+
 
     <!-- Comment Section -->
     <div class="comments">
@@ -235,25 +210,22 @@
         <div class="container"  style="margin-top: -40px;">
             <div class="row page-content">
                 <main class="col-sm-8 col-md-9 content p_r_40">
+                    {% for i in related_posts %}
                     <div class="media meida-md">
                         <div class="media-left">
-                            <a href="#"><img src="{% static 'front/img/370x300-1.jpg'%}" class="media-object" alt=""></a>
+                            <a href="{% url 'news_detail' name=i.name cat=i.catname %}"><img src="{{i.picurl}}" class="media-object" alt=""></a>
                         </div>
-                        <!-- /.Post image -->
                         <div class="media-body">
                             <div class="post-header">
-                                <div class="post-cat"><span>In</span> <a href="#">Lifestyle</a></div>
-                                <h3 class="media-heading"><a href="#">It is a long <em>established fact</em> that a reader will be distracted by the readable.</a></h3>
+                                <div class="post-cat"><span>In</span> <a href="#">{{i.catname}}</a></div>
+                                <h3 class="media-heading"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h3>
                                 <div class="entry-meta">
-                                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
-                                    <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time >{{i.date}}</time></span> 
                                 </div>
-                                <!-- /.Post meta -->
                             </div>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                            <p>{{i.intro_text}}</p>
                             <div class="element-block">
-                                <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
-                                <!-- /.Post button -->
+                                <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
                                 <div class="post_share">
                                     <a class="smedia facebook fa fa-facebook" href="#"></a>
                                     <a class="smedia twitter fa fa-twitter" href="#"></a>
@@ -261,40 +233,10 @@
                                     <a class="smedia linkedin fa fa-linkedin" href="#"></a>
                                     <a class="smedia pinterest fa fa-pinterest-p" href="#"></a>
                                 </div>
-                                <!-- /.Post social share -->
-                            </div>
-                        </div>
-                        </div>
-                        <div class="media meida-md">
-                        <div class="media-left">
-                            <a href="#"><img src="{% static 'front/img/370x300-2.jpg'%}" class="media-object" alt=""></a>
-                        </div>
-                        <!-- /.Post image -->
-                        <div class="media-body">
-                            <div class="post-header">
-                                <div class="post-cat"><span>In</span> <a href="#">Lifestyle</a></div>
-                                <h3 class="media-heading"><a href="#">It is a long <em>established fact</em> that a reader will be distracted by the readable.</a></h3>
-                                <div class="entry-meta">
-                                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
-                                    <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
-                                </div>
-                                <!-- /.Post meta -->
-                            </div>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
-                            <div class="element-block">
-                                <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
-                                <!-- /.Post button -->
-                                <div class="post_share">
-                                    <a class="smedia facebook fa fa-facebook" href="#"></a>
-                                    <a class="smedia twitter fa fa-twitter" href="#"></a>
-                                    <a class="smedia googleplus fa fa-google-plus" href="#"></a>
-                                    <a class="smedia linkedin fa fa-linkedin" href="#"></a>
-                                    <a class="smedia pinterest fa fa-pinterest-p" href="#"></a>
-                                </div>
-                                <!-- /.Post social share -->
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </main>
             </div>
         </div>    

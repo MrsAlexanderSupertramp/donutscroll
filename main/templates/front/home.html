@@ -2,7 +2,6 @@
 
 {% load static %}
 
-
 {% block home-head-references %}
 
 <meta charset="utf-8">
@@ -40,15 +39,15 @@
             {% if i.position == "Main" %}
             <div class="col-sm-6 mas-p">
                 <div class="mas-item mas-big">
-                    <a href="#"><figure><img src="{{i.picurl}}" class="img-responsive" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"></figure></a>
+                    <a href="{% url 'news_detail' name=i.name cat=i.catname %}"><figure><img src="{{i.picurl}}" class="img-responsive" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"></figure></a>
                     <div class="mas-text">
-                        <div class="post-cat"><a href="#">{{i.catname}}</a></div>
-                        <h2 class="mas-title"><a href="#">{{i.name}}</a></h2>
+                        <div class="post-cat"><a href="{% url 'news_section' name=i.catname %}">{{i.catname}}</a></div>
+                        <h2 class="mas-title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h2>
                         <div class="mas-details">
                             
                             <p>{{i.intro_text}}</p>
                             
-                            <a href="#" class="read-more">Read More &#8702;</a>
+                            <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="read-more">Read More &#8702;</a>
                         </div>
                     </div>
                 </div> 
@@ -68,12 +67,12 @@
                             {% if i.position == "Top_Left" %}
                             <div class="item mas-m-b">
                                 <div class="mas-item masonry-sm">
-                                    <a href="#"><figure><img src="{{i.picurl}}" class="img-responsive" alt=""></figure></a>
+                                    <a href="{% url 'news_detail' name=i.name cat=i.catname %}"><figure><img src="{{i.picurl}}" class="img-responsive" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"></figure></a>
                                     <div class="mas-text">
-                                        <div class="post-cat"><a href="#">{{i.catname}}</a></div>
-                                        <h4 class="mas-title"><a href="#">{{i.name}}</a></h4>
+                                        <div class="post-cat"><a href="{% url 'news_section' name=i.catname %}">{{i.catname}}</a></div>
+                                        <h4 class="mas-title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h4>
                                         <div class="mas-details">
-                                            <a href="#" class="read-more">Read More &#8702;</a>
+                                            <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="read-more">Read More &#8702;</a>
                                         </div>  
                                     </div>
                                 </div>
@@ -90,12 +89,12 @@
                             {% if i.position == "Top_Right" %}
                             <div class="item">
                                 <div class="mas-item masonry-sm">
-                                    <a href="#"><figure><img src="{{i.picurl}}" class="img-responsive" alt=""></figure></a>
+                                    <a href="{% url 'news_detail' name=i.name cat=i.catname %}"><figure><img src="{{i.picurl}}" class="img-responsive" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"></figure></a>
                                     <div class="mas-text">
-                                        <div class="post-cat"><a href="#">{{i.catname}}</a></div>
-                                        <h4 class="mas-title"><a href="#">{{i.name}}</a></h4>
+                                        <div class="post-cat"><a href="{% url 'news_section' name=i.catname %}">{{i.catname}}</a></div>
+                                        <h4 class="mas-title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h4>
                                         <div class="mas-details">
-                                            <a href="#" class="read-more">Read More &#8702;</a>
+                                            <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="read-more">Read More &#8702;</a>
                                         </div>
                                     </div>
                                 </div>
@@ -115,12 +114,12 @@
                             {% if i.position == "Bottom_Left" %}
                             <div class="item">
                                 <div class="mas-item masonry-sm">
-                                    <a href="#"><figure><img src="{{i.picurl}}" class="img-responsive" alt=""></figure></a>
+                                    <a href="{% url 'news_detail' name=i.name cat=i.catname %}"><figure><img src="{{i.picurl}}" class="img-responsive" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"></figure></a>
                                     <div class="mas-text">
-                                        <div class="post-cat"><a href="#">{{i.catname}}</a></div>
-                                        <h4 class="mas-title"><a href="#">{{i.name}}</a></h4>
+                                        <div class="post-cat"><a href="{% url 'news_section' name=i.catname %}">{{i.catname}}</a></div>
+                                        <h4 class="mas-title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h4>
                                         <div class="mas-details">
-                                            <a href="#" class="read-more">Read More &#8702;</a>
+                                            <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="read-more">Read More &#8702;</a>
                                         </div>
                                     </div>
                                 </div>
@@ -137,12 +136,12 @@
                             {% if i.position == "Bottom_Right" %}
                             <div class="item">
                                 <div class="mas-item masonry-sm">
-                                    <a href="#"><figure><img src="{{i.picurl}}" class="img-responsive" alt=""></figure></a>
+                                    <a href="{% url 'news_detail' name=i.name cat=i.catname %}"><figure><img src="{{i.picurl}}" class="img-responsive" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"></figure></a>
                                     <div class="mas-text">
-                                        <div class="post-cat"><a href="#">{{i.catname}}</a></div>
-                                        <h4 class="mas-title"><a href="#">{{i.name}}</a></h4>
+                                        <div class="post-cat"><a href="{% url 'news_section' name=i.catname %}">{{i.catname}}</a></div>
+                                        <h4 class="mas-title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h4>
                                         <div class="mas-details">
-                                            <a href="#" class="read-more">Read More &#8702;</a>
+                                            <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="read-more">Read More &#8702;</a>
                                         </div>
                                     </div>
                                 </div>
@@ -167,26 +166,7 @@
 
 <main class="col-xs-12 col-sm-8 col-md-9 content p_r_40">
 
-    {% for i in news %}
-    {% if i.identifier_home == "Guest_Post" %}
-    <article class="grid_post grid_post_lg text-center" style="padding: 0 20px 20px 20px;">
-        <figure>
-            <a href="#" class="grid_image"><img src="{{i.picurl}}" class="img-responsive" id="guest_img" alt=""></a>
-            <figcaption>
-                <div class="post-cat"><span>In</span> <a href="#">{{i.catname}}</a></div>
-                <div class="entry-meta">
-                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
-                    <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
-                </div>
-                <h3 class="grid_post_title"><a href="{% url 'news_detail' pk=i.pk %}">{{i.name}}</a></h3>
-                <p>{{i.intro_text}}</p>
-                <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
-                <!-- /.Post button -->
-            </figcaption>
-        </figure>
-    </article>
-    {% endif %}
-    {% endfor %}
+
 
     {% for i in category %}
     <div class="category-holder style1">
@@ -200,14 +180,14 @@
                 {% if i.name == j.catname %}
                 <article class="grid_post">
                     <figure>
-                        <a href="#" class="grid_image"><img src="{{j.picurl}}" class="img-responsive" alt="" style="width: 100%; height: auto;"></a>
+                        <a href="{% url 'news_detail' name=j.name cat=j.catname %}" class="grid_image"><img src="{{j.picurl}}" class="img-responsive" alt="" style="width: 100%; height: auto;"></a>
                         <figcaption>
                             <!--<div class="post-cat"><a href="#">Fashion</a></div>-->
                             <div class="entry-meta">
-                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{j.date}}</time></span> 
-                                <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span> 
+                                <span class="comment-link"><a href="{% url 'home' %}"> |&nbsp;&nbsp; DonutScroll</a></span>
                             </div>
-                            <h4 class="grid_post_title"><a href="{% url 'news_detail' pk=i.pk %}">{{j.name}}</a></h4>
+                            <h4 class="grid_post_title"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{j.name}}</a></h4>
                             <p>{{j.intro_text}}</p>
                             <!-- /.Post button -->
                         </figcaption>
@@ -221,13 +201,14 @@
                 {% for k in featured_home_general %}
                 {% if i.name == k.catname %}
                 <div class="media latest_post">
-                    <a class="media-left" href="#">
+                    <a class="media-left" href="{% url 'news_detail' name=j.name cat=j.catname %}">
                         <img src="{{k.picurl}}" class="media-object" alt="">
                     </a>
                     <div class="media-body">
-                        <h6 class="media-heading"><a href="#">{{k.name}}</a></h6>
+                        <h6 class="media-heading"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{k.name}}</a></h6>
                         <div class="entry-meta">
-                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{k.date}}</time></span> 
+                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span> 
+                            <span class="comment-link"><a href="{% url 'home' %}"> |&nbsp;&nbsp; DonutScroll</a></span>
                         </div>
                     </div>
                 </div>

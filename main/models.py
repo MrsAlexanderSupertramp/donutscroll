@@ -16,6 +16,13 @@ class Main(models.Model):
         return self.settings + " | " + str(self.pk)
 
 
+class Trending(models.Model) :
+    name = models.CharField(max_length=100, default="-")
+
+    def __str__(self):
+        return self.name
+
+
 class HeadingDropdown(models.Model) :
 
     catname = models.CharField(max_length=50, default="-")
@@ -74,7 +81,7 @@ class PicturesGallery(models.Model) :
 
 class ExtraPages(models.Model) :
     pagename = models.CharField(max_length=100, default="-")
-    pagecontent = models.CharField(max_length=100, null=True, blank=True)
+    pagecontent = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.pagename

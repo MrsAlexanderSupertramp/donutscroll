@@ -5,7 +5,6 @@ from main.models import Main
 from category.models import Category
 from comments.models import Comments
 from main.models import Main, HeadingDropdown, MostViewed, FeaturedHome, MasonryHome, PicturesGallery, ExtraPages
-from singular_manager.models import Singular_Manager
 from django.core.files.storage import FileSystemStorage
 import datetime
 
@@ -20,25 +19,6 @@ def news_list(request):
     category = Category.objects.all()
 
     return render(request, 'back/news_list.html', {'news': news, 'category': category})
-
-
-def news_list_by_position_home(request):
-
-    # Controlling User Access to Control Panel
-    if not request.user.is_authenticated :
-        return redirect('mylogin')
-
-    news = News.objects.all()
-    category = Category.objects.all()
-
-    temp = News.objects.raw('SELECT ID, name, identifier_home FROM news_news')
-
-    for i in temp:
-        print(i.name)
-        print(i.identifier_home)
-
-
-    return render(request, 'back/news_list_by_position_home.html', {'news': news, 'category': category})
 
 
 def news_add(request):
@@ -73,7 +53,6 @@ def news_add(request):
     time  = str(hour) + ":" + str(minute)
 
     category = Category.objects.all()
-    singular_manager = Singular_Manager.objects.all()
 
     if request.method == 'POST':
 
@@ -82,11 +61,10 @@ def news_add(request):
         newstrend = request.POST.get('newstrend')
         newsintro = request.POST.get('newsintro')
         newsbody = request.POST.get('newsbody')
-        newsidentifierHome = request.POST.get('newsidentifierHome')
         
 
 
-        if newstitle == "" or newscat == "" or newstrend == "" or newsbody == "" or newsintro == "" or newsidentifierHome == "":
+        if newstitle == "" or newscat == "" or newstrend == "" or newsbody == "" or newsintro == "" :
             error = 'Fill all the required details.'
             return render(request, 'back/error.html', {'error': error})
 
@@ -102,7 +80,7 @@ def news_add(request):
 
                 if myfile.size < 5000000:
 
-                    obj = News(name=newstitle, intro_text=newsintro, identifier_home=newsidentifierHome, body_text=newsbody, date=today, time= time, picname= filename, picurl=url, writer="-", catname=newscat, catid=0, views=0, trending=newstrend) 
+                    obj = News(name=newstitle, intro_text=newsintro, body_text=newsbody, date=today, time= time, picname= filename, picurl=url, writer="-", catname=newscat, catid=0, views=0, trending=newstrend) 
                     obj.save()
 
                     # temp = len(News.objects.filter(catname = newscat))
@@ -139,7 +117,7 @@ def news_add(request):
             return render(request, 'back/error.html', {'error': error})    
         
   
-    return render(request, 'back/news_add.html', {'category' : category, 'singular_manager': singular_manager})
+    return render(request, 'back/news_add.html', {'category' : category})
 
 
 def news_delete(request, pk):
@@ -211,10 +189,9 @@ def news_edit(request, pk):
             newstrend = request.POST.get('newstrend')
             newsintro = request.POST.get('newsintro')
             newsbody = request.POST.get('newsbody')
-            newsidentifierHome = request.POST.get('newsidentifierHome')
             
 
-            if newstitle == "" or newscat == ""  or newstrend == "" or newsintro == "" or newsbody == "" or newsidentifierHome == "":
+            if newstitle == "" or newscat == ""  or newstrend == "" or newsintro == "" or newsbody == "" :
                 error = 'Fill all the required details.'
                 return render(request, 'back/error.html', {'error': error})
 
@@ -241,7 +218,6 @@ def news_edit(request, pk):
                         obj.picurl     = url
                         obj.catname    = newscat
                         obj.trending   = newstrend
-                        obj.identifier_home = newsidentifierHome
 
                         # all the special Posts by position will be modified here
                         try: 
@@ -311,7 +287,6 @@ def news_edit(request, pk):
                 obj.body_text  = newsbody
                 obj.catname    = newscat
                 obj.trending   = newstrend
-                obj.identifier_home = newsidentifierHome
 
                 # all the special Posts by position will be modified here
                 try :

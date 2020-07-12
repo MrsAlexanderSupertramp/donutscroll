@@ -38,44 +38,15 @@
             <form action="{% url 'news_edit' pk=pk %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                {% csrf_token %}
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <input type="text" value="{{news.name}}" id="newstitle" name="newstitle" class="form-control" placeholder="News Title">
                     </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <select id="newscat" name="newscat" class="select-chosen" data-placeholder="Choose a Category..." style="width: 250px;">
                             <option value="{{news.catname}}">{{news.catname}}</option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                             {% for i in category %}
                             <option value="{{i.name}}">{{i.name}}</option>
                             {% endfor %}
-                
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <select id="newstrend" name="newstrend" class="select-chosen" data-placeholder="Choose to trend..." style="width: 250px;">
-                            <option value="{{news.trending}}">{{news.trending}}</option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                            
-                            <option value="True">True</option>
-                            <option value="False">False</option>
-                        
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-6">
-                        <select id="newsidentifierHome" name="newsidentifierHome" class="select-chosen" data-placeholder="Choose where to display..." style="width: 250px;">
-                            <option>{{news.identifier_home}}</option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                            
-
-                            {% for i in singular_manager %}
-                            <option value="{{i.identifier_home}}">{{i.identifier_home}}</option>
-                            {% endfor %}
-                
                         </select>
                     </div>
                 </div>

@@ -11,7 +11,6 @@ urlpatterns = [
     url(r'', include('main.urls')),
     url(r'', include('news.urls')),
     url(r'', include('category.urls')),
-    url(r'', include('singular_manager.urls')),
     url(r'', include('comments.urls')),
     url(r'', include('manager.urls')),
     url(r'', include('newsletter.urls')),
