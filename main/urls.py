@@ -4,15 +4,16 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
-    url(r'^(?P<cat>.*)/(?P<name>.*)/$', views.news_detail, name="news_detail"),
-    url(r'^(?P<name>.*)/$', views.news_section, name="news_section"),
-    url(r'^handler/$', views.panel, name="panel"),
+    url(r'^Extended/(?P<cat>.*)/(?P<name>.*)/$', views.news_detail, name="news_detail"),
+    url(r'^Category/(?P<name>.*)/$', views.news_section, name="news_section"),
+    url(r'^panel/$', views.panel, name="panel"),
     url(r'^login/$', views.mylogin, name="mylogin"),
     url(r'^register/$', views.myregister, name="myregister"),
     url(r'^logout/$', views.mylogout, name="mylogout"),
     url(r'^comment/add/$', views.comments_add, name="comments_add"),
     url(r'^comment/reply/add/$', views.comments_reply_add, name="comments_reply_add"),
     url(r'^search/$', views.news_search, name="news_search"),
+    url(r'^trending/forward/(?P<name>.*)/$', views.trending_forward, name="trending_forward"),
     url(r'^error/$', views.error, name="error"),
 
     url(r'^panel/settings/postbyposition/$', views.post_by_position, name="post_by_position"),
@@ -43,6 +44,7 @@ urlpatterns = [
     url(r'^privacy-policy/$', views.privacy_policy, name="privacy_policy"),
     url(r'^terms-of-service/$', views.terms_of_service, name="terms_of_service"),
     url(r'^diversity-and-corrections-policy/$', views.diversity_and_corrections_policy, name="diversity_and_corrections_policy"),
+
 
 
 ]

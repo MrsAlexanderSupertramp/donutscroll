@@ -1,0 +1,549 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+
+
+<!-- Mirrored from www.surfica.in/linica-liner.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Jul 2020 05:06:37 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Linica Liner | Surfica</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,700" rel="stylesheet">
+
+	<!-- Animate.css -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+
+<body>
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-2">
+							<div id="colorlib-logo">
+								<a href="{% url 'home' %}">
+									<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									viewBox="0 0 176 54.3" style="enable-background:new 0 0 176 54.3;" xml:space="preserve" width="200px">
+								<style type="text/css">
+									.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+									.st1{fill:#FFFFFF;}
+									.st2{fill:none;}
+								</style>
+								<path class="st0" d="M49,17c0-0.3-0.1-0.5-0.4-0.7l-10.5-6c0,0,0,0,0,0L27.6,4.2C27.4,4,27,4,26.8,4.2l-10.5,6.1l0,0l-10.5,6
+									c-0.3,0.1-0.5,0.4-0.5,0.7v12.2v12.2h0c0,0.3,0.1,0.6,0.4,0.7l10.5,6.1l10.5,6.1c0.2,0.1,0.6,0.2,0.8,0l10.5-6.1l10.5-6
+									c0.3-0.1,0.5-0.4,0.5-0.7V29.2L49,17L49,17z M7,30.5l8.1,4.7L7,39.9V30.5z M27.8,28.6l-0.2-0.1c-0.1-0.1-0.3-0.2-0.5-0.2h-18
+									l18-10.4l19.4,11.2l-8.9,5.1L27.8,28.6z M36.1,35.2l-6.3,3.6l-2.6,1.5l-8.9-5.1l8.9-5.1L36.1,35.2z M17,29.9l7.2,0l-7.5,4.3
+									l-7.5-4.3H17z M27.2,52.5L7.8,41.3l8.9-5.1L26.8,42c0.1,0.1,0.3,0.1,0.4,0.1h18L27.2,52.5z M37.4,40.5l-7.1,0l7.5-4.3l7.5,4.3H37.4z
+									M47.4,39.9l-8.1-4.7l8.1-4.7V39.9z M47.4,27.7L27.6,16.3c-0.3-0.2-0.6-0.1-0.8,0L7,27.7V17.5l10.1-5.8l10.1-5.8l10.1,5.8
+									c0,0,0,0,0,0l10.1,5.8V27.7z"/>
+								<path class="st1" d="M161.4,23.6l2.2-5.2l2.2,5.2H161.4z M156.9,28.8h2.3l1.3-3.1h6.1l1.3,3.1h2.4l-5.7-13.1h-2.1L156.9,28.8z
+									M145.8,29c2.4,0,3.9-0.9,5.3-2.3l-1.5-1.5c-1.1,1-2.1,1.7-3.7,1.7c-2.5,0-4.3-2.1-4.3-4.6v0c0-2.5,1.8-4.6,4.3-4.6
+									c1.5,0,2.6,0.6,3.6,1.6l1.5-1.7c-1.2-1.2-2.7-2-5.1-2c-3.9,0-6.7,3-6.7,6.7v0C139.1,26.1,142,29,145.8,29 M129.4,28.8h2.3v-13h-2.3
+									V28.8z M112.6,28.8h2.3v-5.3h6.6v-2.1h-6.6v-3.5h7.4v-2.1h-9.7V28.8z M96.9,22.2v-4.4h3.3c1.7,0,2.7,0.8,2.7,2.2v0
+									c0,1.3-1,2.2-2.7,2.2H96.9z M94.6,28.8h2.3v-4.5h2.9l3.2,4.5h2.7l-3.5-4.9c1.8-0.5,3.1-1.8,3.1-3.9v0c0-1.1-0.4-2.1-1.1-2.8
+									c-0.8-0.8-2.1-1.3-3.8-1.3h-5.8V28.8z M81.4,29c3.4,0,5.6-1.9,5.6-5.8v-7.4h-2.3v7.5c0,2.4-1.2,3.6-3.3,3.6c-2,0-3.3-1.3-3.3-3.7
+									v-7.4h-2.3v7.5C75.8,27,78,29,81.4,29 M64.2,29c2.7,0,4.6-1.5,4.6-3.9v0c0-2.2-1.4-3.1-4.2-3.8c-2.5-0.6-3.1-1-3.1-2v0
+									c0-0.9,0.8-1.5,2.1-1.5c1.2,0,2.4,0.5,3.5,1.3l1.2-1.7c-1.3-1.1-2.8-1.6-4.7-1.6c-2.6,0-4.4,1.5-4.4,3.8v0c0,2.4,1.6,3.2,4.3,3.9
+									c2.4,0.6,2.9,1.1,2.9,2v0c0,1-0.9,1.6-2.3,1.6c-1.6,0-2.9-0.6-4.1-1.7l-1.4,1.6C60.3,28.3,62.2,29,64.2,29"/>
+								<path class="st0" d="M170.1,17.3c0.2,0,0.3-0.1,0.4-0.2c0.1-0.1,0.1-0.2,0.1-0.4v0c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.1-0.1-0.2
+									c-0.1-0.1-0.1-0.1-0.2-0.1c-0.1,0-0.2-0.1-0.3-0.1H169v2h0.2v-0.8h0.6l0.6,0.8h0.3L170.1,17.3z M169.3,17.2v-0.7h0.6
+									c0.2,0,0.3,0,0.4,0.1c0.1,0.1,0.1,0.2,0.1,0.3v0c0,0.1,0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.4,0.1H169.3z"/>
+								<g>
+									<path class="st1" d="M169.8,19.1c-0.3,0-0.5,0-0.7-0.1c-0.2-0.1-0.4-0.2-0.6-0.4c-0.2-0.2-0.3-0.4-0.4-0.6
+										c-0.1-0.2-0.1-0.5-0.1-0.7c0-0.3,0-0.5,0.1-0.7c0.1-0.2,0.2-0.4,0.4-0.6c0.2-0.2,0.4-0.3,0.6-0.4c0.2-0.1,0.5-0.1,0.7-0.1
+										c0.3,0,0.5,0,0.7,0.1c0.2,0.1,0.4,0.2,0.6,0.4c0.2,0.2,0.3,0.4,0.4,0.6c0.1,0.2,0.1,0.5,0.1,0.7c0,0.3,0,0.5-0.1,0.7
+										c-0.1,0.2-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.3-0.6,0.4C170.3,19.1,170.1,19.1,169.8,19.1z M169.8,15.5c-0.3,0-0.5,0-0.7,0.1
+										c-0.2,0.1-0.4,0.2-0.6,0.4c-0.2,0.2-0.3,0.3-0.4,0.6c-0.1,0.2-0.1,0.4-0.1,0.7c0,0.3,0,0.5,0.1,0.7c0.1,0.2,0.2,0.4,0.4,0.6
+										c0.2,0.2,0.3,0.3,0.6,0.4c0.2,0.1,0.4,0.1,0.7,0.1c0.3,0,0.5,0,0.7-0.1c0.2-0.1,0.4-0.2,0.6-0.4c0.2-0.2,0.3-0.4,0.4-0.6
+										c0.1-0.2,0.1-0.4,0.1-0.7c0-0.2,0-0.5-0.1-0.7c-0.1-0.2-0.2-0.4-0.4-0.6c-0.1-0.1-0.3-0.3-0.5-0.4
+										C170.3,15.5,170.1,15.5,169.8,15.5z"/>
+								</g>
+								<g>
+									<g>
+										<path class="st1" d="M69.6,35H73v0.8h-1.2v4.7h-1v-4.7h-1.2V35z"/>
+										<path class="st1" d="M74.7,40.6V35h1v2.2h1.5V35h1v5.6h-1V38h-1.5v2.5H74.7z"/>
+										<path class="st1" d="M80.2,40.6V35h2.9v0.8h-1.9v1.4H83v0.8h-1.7v1.7h1.9v0.8H80.2z"/>
+										<path class="st1" d="M87.8,40.6V35h1v4.7h1.9v0.8H87.8z"/>
+										<path class="st1" d="M92.1,40.6l1.3-5.6h1.4l1.3,5.6H95l-0.3-1.4h-1.2l-0.3,1.4H92.1z M93.7,38.4h0.9l-0.3-1.6
+											c-0.1-0.3-0.1-0.5-0.1-0.8c0-0.1,0-0.3,0-0.4h0c0,0.1,0,0.2,0,0.4c0,0.3-0.1,0.5-0.1,0.8L93.7,38.4z"/>
+										<path class="st1" d="M98.8,40.6h-1V35h1.7l0.6,2.6c0.1,0.4,0.1,0.9,0.2,1.3h0c0.1-0.5,0.1-0.9,0.2-1.3l0.6-2.6h1.6v5.6h-1v-1.7
+											c0-1.1,0-2.2,0.1-3.3h0l-1.1,5.1h-0.6l-1.1-5.1h0c0.1,1.1,0.1,2.2,0.1,3.3V40.6z"/>
+										<path class="st1" d="M104.5,40.6V35h1v5.6H104.5z"/>
+										<path class="st1" d="M110.1,35h1v5.6h-1.1l-0.8-2c-0.3-0.7-0.5-1.3-0.7-2.2h0c0,0.5,0.1,1,0.1,1.6c0,0.6,0.1,1.1,0.1,1.6v1h-1V35
+											h1.1l0.8,2c0.3,0.6,0.5,1.3,0.7,2.2h0c0-0.5-0.1-1-0.1-1.6c0-0.5-0.1-1.1-0.1-1.6V35z"/>
+										<path class="st1" d="M112.7,40.6l1.3-5.6h1.4l1.3,5.6h-1.1l-0.3-1.4h-1.2l-0.3,1.4H112.7z M114.3,38.4h0.9l-0.3-1.6
+											c-0.1-0.3-0.1-0.5-0.1-0.8c0-0.1,0-0.3,0-0.4h0c0,0.1,0,0.2,0,0.4c0,0.3-0.1,0.5-0.1,0.8L114.3,38.4z"/>
+										<path class="st1" d="M117.5,35h3.5v0.8h-1.2v4.7h-1v-4.7h-1.2V35z"/>
+										<path class="st1" d="M122.6,40.6V35h2.9v0.8h-1.9v1.4h1.7v0.8h-1.7v1.7h1.9v0.8H122.6z"/>
+										<path class="st1" d="M130.2,40.6V35h2.9v0.8h-1.9v1.4h1.7v0.8h-1.7v1.7h1.9v0.8H130.2z"/>
+										<path class="st1" d="M138.5,40.6h-1.2l-0.6-1.4c-0.1-0.2-0.2-0.5-0.2-0.7h0c0,0.4-0.2,0.7-0.4,1l-0.5,1h-1.1l1.4-2.8l-1.3-2.7h1.2
+											l0.6,1.3c0.1,0.2,0.2,0.4,0.2,0.7h0c0-0.4,0.2-0.7,0.3-1l0.4-0.9h1.2l-1.3,2.7L138.5,40.6z"/>
+										<path class="st1" d="M140.2,40.6V35h2.1c1,0,1.3,0.8,1.3,1.6c0,0.5-0.1,1-0.5,1.3c-0.3,0.3-0.8,0.3-1.2,0.3h-0.7v2.3H140.2z
+											M141.2,37.4h0.6c0.5,0,0.8-0.2,0.8-0.9c0-0.6-0.3-0.7-0.8-0.7h-0.5V37.4z"/>
+										<path class="st1" d="M145.3,40.6V35h2.9v0.8h-1.9v1.4h1.7v0.8h-1.7v1.7h1.9v0.8H145.3z"/>
+										<path class="st1" d="M151.1,38.2v2.4h-1V35h2c0.9,0,1.6,0.3,1.6,1.3c0,0.6-0.2,1.2-0.9,1.3v0c0.6,0.1,0.8,0.5,0.8,1
+											c0,0.2,0,1.6,0.2,1.8v0.1h-1.1c-0.1-0.4-0.1-1-0.1-1.4c0-0.3,0-0.8-0.4-0.9c-0.3-0.1-0.6-0.1-0.9-0.1H151.1z M151.1,37.4h0.8
+											c0.3,0,0.6-0.2,0.6-0.8c0-0.6-0.3-0.7-0.7-0.7h-0.8V37.4z"/>
+										<path class="st1" d="M155.1,35h3.5v0.8h-1.2v4.7h-1v-4.7h-1.2V35z"/>
+									</g>
+								</g>
+								<g>
+									<path class="st2" d="M169.8,18.8c-0.2,0-0.4,0-0.6-0.1c-0.2-0.1-0.4-0.2-0.5-0.3c-0.1-0.1-0.3-0.3-0.3-0.5
+										c-0.1-0.2-0.1-0.4-0.1-0.6c0-0.2,0-0.4,0.1-0.6c0.1-0.2,0.2-0.4,0.3-0.5c0.1-0.1,0.3-0.3,0.5-0.3c0.2-0.1,0.4-0.1,0.6-0.1
+										c0.2,0,0.4,0,0.6,0.1c0.2,0.1,0.4,0.2,0.5,0.3c0.1,0.1,0.3,0.3,0.3,0.5c0.1,0.2,0.1,0.4,0.1,0.6c0,0.2,0,0.4-0.1,0.6
+										c-0.1,0.2-0.2,0.4-0.3,0.5c-0.1,0.1-0.3,0.3-0.5,0.3C170.2,18.8,170,18.8,169.8,18.8z M169.8,15.8c-0.2,0-0.4,0-0.6,0.1
+										c-0.2,0.1-0.3,0.2-0.5,0.3c-0.1,0.1-0.2,0.3-0.3,0.5c-0.1,0.2-0.1,0.4-0.1,0.6c0,0.2,0,0.4,0.1,0.6c0.1,0.2,0.2,0.3,0.3,0.5
+										c0.1,0.1,0.3,0.2,0.5,0.3c0.2,0.1,0.4,0.1,0.6,0.1c0.2,0,0.4,0,0.6-0.1c0.2-0.1,0.3-0.2,0.5-0.3c0.1-0.1,0.2-0.3,0.3-0.5
+										c0.1-0.2,0.1-0.4,0.1-0.6c0-0.2,0-0.4-0.1-0.6c-0.1-0.2-0.2-0.3-0.3-0.5c-0.1-0.1-0.3-0.2-0.5-0.3C170.2,15.8,170,15.8,169.8,15.8z
+										"/>
+								</g>
+								</svg>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 text-right menu-1">
+							<ul>
+								<li class="has-dropdown active">
+									<a href="javascript:void(0)">Collection</a>
+									<ul class="dropdown">
+									</ul>
+								</li>
+								<li class="has-dropdown">
+								    <a href="javascript:void(0)">Catalogue</a>
+								    <ul class="dropdown">
+										<li><a href="1mm-vol1/1mm-catalogue.html">Surfica 1mm Vol-1</a></li>
+										<li><a href="1mm/1mm-catalogue.html">Surfica 1mm Vol-2</a></li>
+											<!--<li><a href="linica-liner.html">Linica Liner</a></li>-->
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+					<li style="background-image: url({% static 'front/images/df-img/img_bg_3.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-8 col-sm-12 col-md-offset-2 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>OUR VERY OWN Success</h2>
+										<h1>FLAGSHIP PRODUCT 1 MM</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</aside>
+
+
+<!-------------------------------------------------------------------------- product list ------------------------------------------------------------------------------>
+<div id="page">
+<div id="colorlib-project">
+    <div class="container">
+        <div class="row">
+            <div class="gallery-section">
+
+            <div class="gallery-caption col-sm-2 col-xs-6">
+                <a href="{% static 'front/images/2168.jpg' %}" title="">
+                <img alt="1MM" src="{% static 'front/images/2168.jpg' %}" class="img-responsive dg-picture-zoom" />
+                <div class="caption row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="blur caption-text">
+                            <div class="gallery-content">
+                                <h1 class="text-center">2168</h1>
+                            </div>
+                            <div class="gallery_caption_icon"> <span class="icon icon-FullScreen"></span> </div>
+                            <div class="gallery_caption_text"> <span>1MM</span> </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <div class="fullsheet-box">
+                <span class="text-left">2168</span>
+                <span class="text-right">CHARCOAL</span>
+                <p>SUPER MATT, SFONDO, </p>
+            </div>
+            </div>
+
+            <div class="gallery-caption col-sm-2 col-xs-6">
+                <a href="{% static 'front/images/2042.jpg' %}" title="COLOUR WORLD, SUPER SHINE, COLOUR CORE,SUPER MATT, SFONDO,">
+                    <img alt="1MM" src="{% static 'front/images/2042.jpg' %}" class="img-responsive dg-picture-zoom" />
+                    <div class="caption row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="blur caption-text">
+                                <div class="gallery-content">
+                                    <h1 class="text-center">2042</h1>
+                                </div>
+                                <div class="gallery_caption_icon"> <span class="icon icon-FullScreen"></span> </div>
+                                <div class="gallery_caption_text"> <span>1MM</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="fullsheet-box">
+                <span class="text-left">2042</span>
+                <span class="text-right">LIND GREEN</span>
+                <p>COLOUR WORLD, SUPER SHINE, COLOUR CORE</p>
+            </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+	<!-- <div id="colorlib-subscribe">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 colorlib-heading animate-box">
+					<h2>Sign up for a Newsletter</h2>
+					<div class="row">
+						<div class="col-md-7">
+							<p>Enter your email address to get the latest news, events and special offers delivered right to your inbox.</p>
+						</div>
+						<div class="col-md-5">
+							<form class="form-inline qbstp-header-subscribe">
+								<div class="row">
+									<div class="col-md-12 col-md-offset-0">
+										<div class="form-group">
+											<input type="text" class="form-control" id="email" placeholder="Enter your email">
+											<button type="submit" class="btn btn-primary">Subscribe</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<footer id="colorlib-footer" role="contentinfo">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-3">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 176 54.3" style="enable-background:new 0 0 176 54.3;" xml:space="preserve" width="200px">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;}
+</style>
+<path class="st0" d="M49,17c0-0.3-0.1-0.5-0.4-0.7l-10.5-6c0,0,0,0,0,0L27.6,4.2C27.4,4,27,4,26.8,4.2l-10.5,6.1l0,0l-10.5,6
+	c-0.3,0.1-0.5,0.4-0.5,0.7v12.2v12.2h0c0,0.3,0.1,0.6,0.4,0.7l10.5,6.1l10.5,6.1c0.2,0.1,0.6,0.2,0.8,0l10.5-6.1l10.5-6
+	c0.3-0.1,0.5-0.4,0.5-0.7V29.2L49,17L49,17z M7,30.5l8.1,4.7L7,39.9V30.5z M27.8,28.6l-0.2-0.1c-0.1-0.1-0.3-0.2-0.5-0.2h-18
+	l18-10.4l19.4,11.2l-8.9,5.1L27.8,28.6z M36.1,35.2l-6.3,3.6l-2.6,1.5l-8.9-5.1l8.9-5.1L36.1,35.2z M17,29.9l7.2,0l-7.5,4.3
+	l-7.5-4.3H17z M27.2,52.5L7.8,41.3l8.9-5.1L26.8,42c0.1,0.1,0.3,0.1,0.4,0.1h18L27.2,52.5z M37.4,40.5l-7.1,0l7.5-4.3l7.5,4.3H37.4z
+	 M47.4,39.9l-8.1-4.7l8.1-4.7V39.9z M47.4,27.7L27.6,16.3c-0.3-0.2-0.6-0.1-0.8,0L7,27.7V17.5l10.1-5.8l10.1-5.8l10.1,5.8
+	c0,0,0,0,0,0l10.1,5.8V27.7z"/>
+<path class="st1" d="M161.4,23.6l2.2-5.2l2.2,5.2H161.4z M156.9,28.8h2.3l1.3-3.1h6.1l1.3,3.1h2.4l-5.7-13.1h-2.1L156.9,28.8z
+	 M145.8,29c2.4,0,3.9-0.9,5.3-2.3l-1.5-1.5c-1.1,1-2.1,1.7-3.7,1.7c-2.5,0-4.3-2.1-4.3-4.6v0c0-2.5,1.8-4.6,4.3-4.6
+	c1.5,0,2.6,0.6,3.6,1.6l1.5-1.7c-1.2-1.2-2.7-2-5.1-2c-3.9,0-6.7,3-6.7,6.7v0C139.1,26.1,142,29,145.8,29 M129.4,28.8h2.3v-13h-2.3
+	V28.8z M112.6,28.8h2.3v-5.3h6.6v-2.1h-6.6v-3.5h7.4v-2.1h-9.7V28.8z M96.9,22.2v-4.4h3.3c1.7,0,2.7,0.8,2.7,2.2v0
+	c0,1.3-1,2.2-2.7,2.2H96.9z M94.6,28.8h2.3v-4.5h2.9l3.2,4.5h2.7l-3.5-4.9c1.8-0.5,3.1-1.8,3.1-3.9v0c0-1.1-0.4-2.1-1.1-2.8
+	c-0.8-0.8-2.1-1.3-3.8-1.3h-5.8V28.8z M81.4,29c3.4,0,5.6-1.9,5.6-5.8v-7.4h-2.3v7.5c0,2.4-1.2,3.6-3.3,3.6c-2,0-3.3-1.3-3.3-3.7
+	v-7.4h-2.3v7.5C75.8,27,78,29,81.4,29 M64.2,29c2.7,0,4.6-1.5,4.6-3.9v0c0-2.2-1.4-3.1-4.2-3.8c-2.5-0.6-3.1-1-3.1-2v0
+	c0-0.9,0.8-1.5,2.1-1.5c1.2,0,2.4,0.5,3.5,1.3l1.2-1.7c-1.3-1.1-2.8-1.6-4.7-1.6c-2.6,0-4.4,1.5-4.4,3.8v0c0,2.4,1.6,3.2,4.3,3.9
+	c2.4,0.6,2.9,1.1,2.9,2v0c0,1-0.9,1.6-2.3,1.6c-1.6,0-2.9-0.6-4.1-1.7l-1.4,1.6C60.3,28.3,62.2,29,64.2,29"/>
+<path class="st0" d="M170.1,17.3c0.2,0,0.3-0.1,0.4-0.2c0.1-0.1,0.1-0.2,0.1-0.4v0c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.1-0.1-0.2
+	c-0.1-0.1-0.1-0.1-0.2-0.1c-0.1,0-0.2-0.1-0.3-0.1H169v2h0.2v-0.8h0.6l0.6,0.8h0.3L170.1,17.3z M169.3,17.2v-0.7h0.6
+	c0.2,0,0.3,0,0.4,0.1c0.1,0.1,0.1,0.2,0.1,0.3v0c0,0.1,0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.4,0.1H169.3z"/>
+<g>
+	<path class="st1" d="M169.8,19.1c-0.3,0-0.5,0-0.7-0.1c-0.2-0.1-0.4-0.2-0.6-0.4c-0.2-0.2-0.3-0.4-0.4-0.6
+		c-0.1-0.2-0.1-0.5-0.1-0.7c0-0.3,0-0.5,0.1-0.7c0.1-0.2,0.2-0.4,0.4-0.6c0.2-0.2,0.4-0.3,0.6-0.4c0.2-0.1,0.5-0.1,0.7-0.1
+		c0.3,0,0.5,0,0.7,0.1c0.2,0.1,0.4,0.2,0.6,0.4c0.2,0.2,0.3,0.4,0.4,0.6c0.1,0.2,0.1,0.5,0.1,0.7c0,0.3,0,0.5-0.1,0.7
+		c-0.1,0.2-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.3-0.6,0.4C170.3,19.1,170.1,19.1,169.8,19.1z M169.8,15.5c-0.3,0-0.5,0-0.7,0.1
+		c-0.2,0.1-0.4,0.2-0.6,0.4c-0.2,0.2-0.3,0.3-0.4,0.6c-0.1,0.2-0.1,0.4-0.1,0.7c0,0.3,0,0.5,0.1,0.7c0.1,0.2,0.2,0.4,0.4,0.6
+		c0.2,0.2,0.3,0.3,0.6,0.4c0.2,0.1,0.4,0.1,0.7,0.1c0.3,0,0.5,0,0.7-0.1c0.2-0.1,0.4-0.2,0.6-0.4c0.2-0.2,0.3-0.4,0.4-0.6
+		c0.1-0.2,0.1-0.4,0.1-0.7c0-0.2,0-0.5-0.1-0.7c-0.1-0.2-0.2-0.4-0.4-0.6c-0.1-0.1-0.3-0.3-0.5-0.4
+		C170.3,15.5,170.1,15.5,169.8,15.5z"/>
+</g>
+<g>
+	<g>
+		<path class="st1" d="M69.6,35H73v0.8h-1.2v4.7h-1v-4.7h-1.2V35z"/>
+		<path class="st1" d="M74.7,40.6V35h1v2.2h1.5V35h1v5.6h-1V38h-1.5v2.5H74.7z"/>
+		<path class="st1" d="M80.2,40.6V35h2.9v0.8h-1.9v1.4H83v0.8h-1.7v1.7h1.9v0.8H80.2z"/>
+		<path class="st1" d="M87.8,40.6V35h1v4.7h1.9v0.8H87.8z"/>
+		<path class="st1" d="M92.1,40.6l1.3-5.6h1.4l1.3,5.6H95l-0.3-1.4h-1.2l-0.3,1.4H92.1z M93.7,38.4h0.9l-0.3-1.6
+			c-0.1-0.3-0.1-0.5-0.1-0.8c0-0.1,0-0.3,0-0.4h0c0,0.1,0,0.2,0,0.4c0,0.3-0.1,0.5-0.1,0.8L93.7,38.4z"/>
+		<path class="st1" d="M98.8,40.6h-1V35h1.7l0.6,2.6c0.1,0.4,0.1,0.9,0.2,1.3h0c0.1-0.5,0.1-0.9,0.2-1.3l0.6-2.6h1.6v5.6h-1v-1.7
+			c0-1.1,0-2.2,0.1-3.3h0l-1.1,5.1h-0.6l-1.1-5.1h0c0.1,1.1,0.1,2.2,0.1,3.3V40.6z"/>
+		<path class="st1" d="M104.5,40.6V35h1v5.6H104.5z"/>
+		<path class="st1" d="M110.1,35h1v5.6h-1.1l-0.8-2c-0.3-0.7-0.5-1.3-0.7-2.2h0c0,0.5,0.1,1,0.1,1.6c0,0.6,0.1,1.1,0.1,1.6v1h-1V35
+			h1.1l0.8,2c0.3,0.6,0.5,1.3,0.7,2.2h0c0-0.5-0.1-1-0.1-1.6c0-0.5-0.1-1.1-0.1-1.6V35z"/>
+		<path class="st1" d="M112.7,40.6l1.3-5.6h1.4l1.3,5.6h-1.1l-0.3-1.4h-1.2l-0.3,1.4H112.7z M114.3,38.4h0.9l-0.3-1.6
+			c-0.1-0.3-0.1-0.5-0.1-0.8c0-0.1,0-0.3,0-0.4h0c0,0.1,0,0.2,0,0.4c0,0.3-0.1,0.5-0.1,0.8L114.3,38.4z"/>
+		<path class="st1" d="M117.5,35h3.5v0.8h-1.2v4.7h-1v-4.7h-1.2V35z"/>
+		<path class="st1" d="M122.6,40.6V35h2.9v0.8h-1.9v1.4h1.7v0.8h-1.7v1.7h1.9v0.8H122.6z"/>
+		<path class="st1" d="M130.2,40.6V35h2.9v0.8h-1.9v1.4h1.7v0.8h-1.7v1.7h1.9v0.8H130.2z"/>
+		<path class="st1" d="M138.5,40.6h-1.2l-0.6-1.4c-0.1-0.2-0.2-0.5-0.2-0.7h0c0,0.4-0.2,0.7-0.4,1l-0.5,1h-1.1l1.4-2.8l-1.3-2.7h1.2
+			l0.6,1.3c0.1,0.2,0.2,0.4,0.2,0.7h0c0-0.4,0.2-0.7,0.3-1l0.4-0.9h1.2l-1.3,2.7L138.5,40.6z"/>
+		<path class="st1" d="M140.2,40.6V35h2.1c1,0,1.3,0.8,1.3,1.6c0,0.5-0.1,1-0.5,1.3c-0.3,0.3-0.8,0.3-1.2,0.3h-0.7v2.3H140.2z
+			 M141.2,37.4h0.6c0.5,0,0.8-0.2,0.8-0.9c0-0.6-0.3-0.7-0.8-0.7h-0.5V37.4z"/>
+		<path class="st1" d="M145.3,40.6V35h2.9v0.8h-1.9v1.4h1.7v0.8h-1.7v1.7h1.9v0.8H145.3z"/>
+		<path class="st1" d="M151.1,38.2v2.4h-1V35h2c0.9,0,1.6,0.3,1.6,1.3c0,0.6-0.2,1.2-0.9,1.3v0c0.6,0.1,0.8,0.5,0.8,1
+			c0,0.2,0,1.6,0.2,1.8v0.1h-1.1c-0.1-0.4-0.1-1-0.1-1.4c0-0.3,0-0.8-0.4-0.9c-0.3-0.1-0.6-0.1-0.9-0.1H151.1z M151.1,37.4h0.8
+			c0.3,0,0.6-0.2,0.6-0.8c0-0.6-0.3-0.7-0.7-0.7h-0.8V37.4z"/>
+		<path class="st1" d="M155.1,35h3.5v0.8h-1.2v4.7h-1v-4.7h-1.2V35z"/>
+	</g>
+</g>
+<g>
+	<path class="st2" d="M169.8,18.8c-0.2,0-0.4,0-0.6-0.1c-0.2-0.1-0.4-0.2-0.5-0.3c-0.1-0.1-0.3-0.3-0.3-0.5
+		c-0.1-0.2-0.1-0.4-0.1-0.6c0-0.2,0-0.4,0.1-0.6c0.1-0.2,0.2-0.4,0.3-0.5c0.1-0.1,0.3-0.3,0.5-0.3c0.2-0.1,0.4-0.1,0.6-0.1
+		c0.2,0,0.4,0,0.6,0.1c0.2,0.1,0.4,0.2,0.5,0.3c0.1,0.1,0.3,0.3,0.3,0.5c0.1,0.2,0.1,0.4,0.1,0.6c0,0.2,0,0.4-0.1,0.6
+		c-0.1,0.2-0.2,0.4-0.3,0.5c-0.1,0.1-0.3,0.3-0.5,0.3C170.2,18.8,170,18.8,169.8,18.8z M169.8,15.8c-0.2,0-0.4,0-0.6,0.1
+		c-0.2,0.1-0.3,0.2-0.5,0.3c-0.1,0.1-0.2,0.3-0.3,0.5c-0.1,0.2-0.1,0.4-0.1,0.6c0,0.2,0,0.4,0.1,0.6c0.1,0.2,0.2,0.3,0.3,0.5
+		c0.1,0.1,0.3,0.2,0.5,0.3c0.2,0.1,0.4,0.1,0.6,0.1c0.2,0,0.4,0,0.6-0.1c0.2-0.1,0.3-0.2,0.5-0.3c0.1-0.1,0.2-0.3,0.3-0.5
+		c0.1-0.2,0.1-0.4,0.1-0.6c0-0.2,0-0.4-0.1-0.6c-0.1-0.2-0.2-0.3-0.3-0.5c-0.1-0.1-0.3-0.2-0.5-0.3C170.2,15.8,170,15.8,169.8,15.8z
+		"/>
+</g>
+</svg>
+				</div>
+				<div class="col-md-3 colorlib-widget">
+					<h4>About Company</h4>
+					<p>SURFICA is a brainchild of SURFICA INDIA LIMITED- an entity that works with a solid motto and zeal to lead the market with high-end laminates.</p>
+					<p>
+						<ul class="colorlib-social-icons">
+							<li>
+								<a href="https://twitter.com/surficaindia" target="_blank">
+									<img class="social-icon" src="{% static 'front/images/df-img/twiiter.png' %}">
+								</a>
+							</li>
+							<li>
+								<a href="https://www.facebook.com/SURFICA-467123550329514" target="_blank">
+									<img class="social-icon" src="{% static 'front/images/df-img/facebook.png' %}">
+								</a>
+							</li>
+							<li>
+								<a href="https://in.pinterest.com/SURFICA_/" target="_blank">
+									<img class="social-icon" src="{% static 'front/images/df-img/pinterest.png' %}">
+								</a>
+							</li>
+							<li><a href="https://www.instagram.com/surfica_/" target="_blank">
+									<img class="social-icon" src="{% static 'front/images/df-img/instagram.png' %}">
+								</a>
+							</li>
+						</ul>
+					</p>
+				</div>
+				<!-- <div class="col-md-3 col-md-push-1">
+					<h4>Recent Blog</h4>
+					<ul class="colorlib-footer-links">
+						<li>
+							<span>&mdash; 20 Jan, 2017</span>
+							<a href="#">Results of Annual General Meeting</a>
+						</li>
+						<li>
+							<span>&mdash; 19 Jan, 2017</span>
+							<a href="#">Construction was awarded with “The Best Construction Company” prize</a>
+						</li>
+						<li>
+							<span>&mdash; 18 Jan, 2017</span>
+							<a href="#">New Saint Michael’s College Residence Hall Buzzing with Student Activity</a>
+						</li>
+					</ul>
+				</div> -->
+				<div class="col-md-3 col-lg-push-1 colorlib-widget">
+					<h4 class="information">Information</h4>
+					<p>
+						<ul class="colorlib-footer-links social-links">
+							<!-- <li><a href="#"><i class="icon-check"></i> Core Values</a></li> -->
+							<!-- <li><a href="#"><i class="icon-check"></i> Company History</a></li> -->
+							<!-- <li><a href="#"><i class="icon-check"></i> FAQ</a></li> -->
+						</ul>
+					</p>
+				</div>
+
+				<div class="col-md-3 col-lg-push-1">
+					<h4>Contact Info</h4>
+					<ul class="colorlib-footer-links social-links">
+							<li>Plot No: 706/2, 706/3, <br> Village: Amodra, Nr. Rampura Cross Road, <br> Sabar Dairy-Talod Road, Ta.: Prantij, Dist.: S.K.,<br> Gujarat – 383 210, INDIA</li>
+							<li>
+							    <a href="tel:+917574803011">
+							    <i>
+							        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="20px" style="vertical-align: sub;">
+                                    <g>
+                                    	<g>
+                                    		<path d="M436.992,74.953c-99.989-99.959-262.08-99.935-362.039,0.055s-99.935,262.08,0.055,362.039s262.08,99.935,362.039-0.055
+                                    			c48.006-48.021,74.968-113.146,74.953-181.047C511.986,188.055,485.005,122.951,436.992,74.953z M387.703,356.605
+                                    			c-0.011,0.011-0.022,0.023-0.034,0.034v-0.085l-12.971,12.885c-16.775,16.987-41.206,23.976-64.427,18.432
+                                    			c-23.395-6.262-45.635-16.23-65.877-29.525c-18.806-12.019-36.234-26.069-51.968-41.899
+                                    			c-14.477-14.371-27.483-30.151-38.827-47.104c-12.408-18.242-22.229-38.114-29.184-59.051
+                                    			c-7.973-24.596-1.366-51.585,17.067-69.717l15.189-15.189c4.223-4.242,11.085-4.257,15.326-0.034
+                                    			c0.011,0.011,0.023,0.022,0.034,0.034l47.957,47.957c4.242,4.223,4.257,11.085,0.034,15.326c-0.011,0.011-0.022,0.022-0.034,0.034
+                                    			l-28.16,28.16c-8.08,7.992-9.096,20.692-2.389,29.867c10.185,13.978,21.456,27.131,33.707,39.339
+                                    			c13.659,13.718,28.508,26.197,44.373,37.291c9.167,6.394,21.595,5.316,29.525-2.56l27.221-27.648
+                                    			c4.223-4.242,11.085-4.257,15.326-0.034c0.011,0.011,0.022,0.022,0.034,0.034l48.043,48.128
+                                    			C391.911,345.502,391.926,352.363,387.703,356.605z"/>
+                                    	</g>
+                                    </g>
+                                    </svg>   
+                                </i>
+							     +91 75748 03011</a></li>
+							<li><a href="mailto:info@surfica.in"><i>
+							    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                	 viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 477.867 477.867;" xml:space="preserve" width="20px" style="vertical-align: sub;">
+                                <g>
+                                	<g>
+                                		<path d="M460.8,68.267H17.067l221.867,182.75L463.309,68.779C462.488,68.539,461.649,68.368,460.8,68.267z"/>
+                                	</g>
+                                </g>
+                                <g>
+                                	<g>
+                                		<path d="M249.702,286.31c-6.288,5.149-15.335,5.149-21.623,0L0,98.406v294.127c0,9.426,7.641,17.067,17.067,17.067H460.8
+                                			c9.426,0,17.067-7.641,17.067-17.067V100.932L249.702,286.31z"/>
+                                	</g>
+                                </g>
+                                </svg>
+							</i> info@surfica.in</a></li>
+							    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="20px" style="vertical-align: sub;">
+                                <g>
+                                	<g>
+                                		<path d="M256,0C161.896,0,85.333,76.563,85.333,170.667c0,28.25,7.063,56.26,20.49,81.104L246.667,506.5
+                                			c1.875,3.396,5.448,5.5,9.333,5.5s7.458-2.104,9.333-5.5l140.896-254.813c13.375-24.76,20.438-52.771,20.438-81.021
+                                			C426.667,76.563,350.104,0,256,0z M256,256c-47.052,0-85.333-38.281-85.333-85.333c0-47.052,38.281-85.333,85.333-85.333
+                                			s85.333,38.281,85.333,85.333C341.333,217.719,303.052,256,256,256z"/>
+                                	</g>
+                                	</g>
+							     </svg>
+							</i> www.surfica.in</a></li>
+						</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<small class="block">Copyright &copy; <script>
+								document.write(new Date().getFullYear());
+							</script> All rights reserved. <a href="https://krioskcreata.com/" target="_blank">Krioskcreata</a></small>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">surfica certification</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Surfica proudly showcases its certification awarded from Milestone certification services for its quality control and process management. Surfica understands its important for the consumer to know about the workings of the company and believes in transparency between the firm and its consumers. 
+                We invite you to visit us and see for yourself how we bring to life your dreams! 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+	<!-- jQuery -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<!-- Stellar Parallax -->
+	<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+	<!-- Flexslider -->
+	<script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+	<!-- Owl carousel -->
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<!-- Magnific Popup -->
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/magnific-popup-options.js' %}"></script>
+	<!-- Counters -->
+	<script src="{% static 'js/jquery.countTo.js' %}"></script>
+	<!-- Main -->
+	<script src="{% static 'js/main.js' %}"></script>
+	<!-- script -->
+  <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+
+<!-- Mirrored from www.surfica.in/linica-liner.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Jul 2020 05:07:36 GMT -->
+</html>

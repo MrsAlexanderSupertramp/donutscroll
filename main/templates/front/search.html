@@ -33,18 +33,18 @@
         {% for i in news %}
         <article class="grid_post">
             <figure>
-                <a href="#" class="grid_image">
+                <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="grid_image">
                     <img src="{{i.picurl}}" class="img-responsive" alt="">
                 </a>
                 <figcaption>
-                    <div class="post-cat"><a href="#">{{i.catname}}</a></div>
+                    <div class="post-cat"><a href="{% url 'news_section' name=i.name %}">{{i.catname}}</a></div>
                     <div class="entry-meta">
-                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
-                        <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{i.date}}</time></span> 
+                        <span class="comment-link"><a href="{% url 'home' %}"> | &nbsp; DonutScroll</a></span>
                     </div>
-                    <h4 class="grid_post_title"><a href="#">There are <em>many variations</em> of passages of Lorem Ipsum available</a></h4>
+                    <h4 class="grid_post_title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h4>
                     <div class="element-block">
-                        <a href="#" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
+                        <a href="{% url 'news_detail' name=i.name cat=i.catname %}" class="btn link-btn btn-outline btn-rounded">Reading &#8702;</a>
                         <!-- /.Post button -->
                         <div class="post_share">
                             <a class="smedia facebook fa fa-facebook" href="#"></a>

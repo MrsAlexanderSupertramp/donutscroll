@@ -66,13 +66,13 @@ body {
 
 @media(min-width: 480px) and (max-width: 600px){
     .container {
-        width: 470px;
+        width: 100%;
     }
 }
 /* Modified Later */
 @media(min-width: 600px) and (max-width: 767px){
     .container {
-        width: 590px;
+        width: 100%;
     }
 }
         
@@ -782,7 +782,21 @@ nav.navbar.bootsnav {
     z-index: 999;
 }
 
-@media (min-width: 993px){
+@media (max-width: 400px) {
+    nav.navbar .navbar-brand img.logo{
+        width: 210px;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 992px) {
+    nav.navbar .navbar-brand img.logo{
+        width: 260px;
+    }
+}
+
+
+
+@media (min-width: 993px) {
     /* Attr Nav ------*/
     .navbar-default .attr-nav{
         display: none;
@@ -1000,7 +1014,7 @@ nav.navbar.bootsnav {
 
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px)  {
     body.side-right > .wrapper {
         margin-left: 0;
         margin-right: 0 !important;
@@ -1022,9 +1036,7 @@ nav.navbar.bootsnav {
     nav.navbar.bootsnav .navbar-brand {
         padding: 10px 15px;
     }
-    nav.navbar .navbar-brand img.logo{
-        width: 250px;
-    }
+
     nav.navbar.bootsnav {
         box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
         -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
@@ -1641,13 +1653,55 @@ ul.cart-list > li.total > .btn:focus{
 #blog-slide.owl-theme .owl-controls .owl-buttons .owl-prev {
     left: 35px;
 }
-@media(max-width: 767px){
+
+
+/*  < ----------------------------------------  masonry  767   --------------------------------------------- > */
+@media(max-width: 400px) {}
+
+@media(max-width: 400px) {
+
+    .mas-big {
+        height: 220px;
+        margin-bottom: 2px;
+    }
+    .mas-big .mas-title{
+        font-size: 15px;
+        line-height: 20px;
+        height: 40px;
+    }
+
+    .mas-big .post-cat a{
+
+        font-size: 10px;
+
+    }
+
+
+    .masonry-sm .post-cat a{
+
+        font-size: 6px;
+
+    }
+
+
+    .masonry-sm {
+        height: 120px;
+        margin-bottom: 0;
+    }
+    .masonry-sm .mas-title {
+        font-size: 9px;
+        line-height: 12px;
+    }
+
+}
+
+@media(max-width: 767px) and (min-width: 401){
     .news-masonry .container {
         padding-right: 4px;
         padding-left: 4px;
     }
     .mas-big {
-        height: 340px;
+        height: 290px;
         margin-bottom: 4px;
     }
     .mas-big .mas-title{
@@ -1671,7 +1725,7 @@ ul.cart-list > li.total > .btn:focus{
         display: none;
     }
     .masonry-sm {
-        height: 182px;
+        height: 152px;
         margin-bottom: 0;
     }
     .masonry-sm .mas-title {

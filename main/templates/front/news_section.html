@@ -37,9 +37,9 @@
                     <img src="{{i.picurl}}" class="img-responsive" alt="">
                 </a>
                 <figcaption>
-                    <div class="post-cat"><a href="#">{{i.catname}}</a></div>
+                    <div class="post-cat"><a href="{% url 'news_section' name=i.name %}">{{i.catname}}</a></div>
                     <div class="entry-meta">
-                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span> 
+                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{i.date}}</time></span> 
                         <span class="comment-link"><a href="{% url 'home' %}"> | &nbsp; DonutScroll</a></span>
                     </div>
                     <h4 class="grid_post_title"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}} </a></h4>

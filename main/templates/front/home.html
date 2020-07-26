@@ -184,7 +184,7 @@
                         <figcaption>
                             <!--<div class="post-cat"><a href="#">Fashion</a></div>-->
                             <div class="entry-meta">
-                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span> 
+                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{j.date}}</time></span> 
                                 <span class="comment-link"><a href="{% url 'home' %}"> |&nbsp;&nbsp; DonutScroll</a></span>
                             </div>
                             <h4 class="grid_post_title"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{j.name}}</a></h4>
@@ -201,13 +201,13 @@
                 {% for k in featured_home_general %}
                 {% if i.name == k.catname %}
                 <div class="media latest_post">
-                    <a class="media-left" href="{% url 'news_detail' name=j.name cat=j.catname %}">
+                    <a class="media-left" href="{% url 'news_detail' name=k.name cat=k.catname %}">
                         <img src="{{k.picurl}}" class="media-object" alt="">
                     </a>
                     <div class="media-body">
-                        <h6 class="media-heading"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{k.name}}</a></h6>
+                        <h6 class="media-heading"><a href="{% url 'news_detail' name=k.name cat=k.catname %}">{{k.name}}</a></h6>
                         <div class="entry-meta">
-                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span> 
+                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{k.date}}</time></span> 
                             <span class="comment-link"><a href="{% url 'home' %}"> |&nbsp;&nbsp; DonutScroll</a></span>
                         </div>
                     </div>

@@ -1,10 +1,5 @@
 {% load static %}
 
-{% load extra_auth %}
-
-
-{% if user.is_authenticated %}
-
 <!DOCTYPE html>
 <!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
@@ -181,7 +176,6 @@
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
                                     <span class="sidebar-header-title">Category</span>
                                 </li>    
-                                {% if request.user|has_group:"masteruser" %}
                                 <!-- category -->
                                 <li>
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Category</span></a>
@@ -194,7 +188,6 @@
                                         </li> 
                                     </ul>   
                                 </li>
-                                {% endif %}
 
 
                                 <!-- Newsletter Section -->
@@ -228,7 +221,6 @@
                                 </li>
 
 
-                                {% if request.user|has_group:"masteruser" %}
                                 <!-- Manager Section -->
                                 <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
@@ -240,10 +232,8 @@
                                     <a href="/panel/manager/list/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Manager List</span></a>
                                     
                                 </li>
-                                {% endif %}
 
                                 <!-- Group Section -->
-                                {% if request.user|has_group:"masteruser" %}
                                 <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
                                     <span class="sidebar-header-title">Groups & Permissions</span>
@@ -254,7 +244,6 @@
                                 <li>
                                     <a href="/panel/permission/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Permission</span></a>    
                                 </li>
-                                {% endif %}
 
                                 
                             </ul>
@@ -360,4 +349,3 @@
     </body>
 </html>
 
-{% endif %}

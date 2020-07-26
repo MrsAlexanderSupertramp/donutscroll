@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>OSRU - News, Blog & Magazine HTML Template</title>
+        <title>{{home}}{{catname}}{{news_details.name}}{{search}}{{error}}{{about}}{{contact}}{{cookie}}{{privacy}} - DonutScroll</title>
         
         
         {% block home-head-references %}
@@ -86,6 +86,7 @@
                                     <li><span class="headre-weather"><i class="fa fa-calendar-check-o"></i>&nbsp; {{today}}</span></li>
                                     <li><a href="{% url 'about' %}">About</a></li>
                                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -98,18 +99,6 @@
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                     <a href="#"><i class="fa fa-linkedin"></i></a>
                                     <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                </li>
-                                <li>
-                                    <div class="weather-top">
-                                        
-                                        <div class="weather-now">
-                                            <span class="degrees">{{temp}}</span>
-                                            <span class="unit">C</span>
-                                        </div>
-
-                                        <div class="weather-city">{{city}} </div>
-                                        
-                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -124,7 +113,7 @@
                     <div class="attr-nav">
                         <ul>
                             <li class="side-menu"><a href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
-                            <li id="btn-search1"><a href="javascript:void(0)" id="btn-search2"></a></li>
+                            <li id="btn-search1"><a href="javascript:void(0)" id="btn-search2"><i class="fa fa-search"></i></a></li>
             
                         </ul>
                     </div>
@@ -201,7 +190,6 @@
                     {% csrf_token %}
                     <input class="search__input" name="search" id="search" type="search"  placeholder="Search and hit enter..."/>
                     <span class="search__info">Hit enter to search or ESC to close</span>
-                    <button type="submit">submit</button>
                 </form>
                 <!-- <div class="search__related">
                     <div class="search__suggestion">
@@ -226,7 +214,7 @@
                         <div id="newsTicker" class="owl-carousel owl-theme">
                             {% for i in trending %}
                             <div class="item">
-                                <a href="#">{{i.name}}.</a>
+                                <a href="{% url 'trending_forward' name=i.name %}">{{i.name}}.</a>
                             </div>
                             {% endfor %}
                         </div>
@@ -259,7 +247,7 @@
 <!-- Search  ------------------------------------------- Main Posts----------------------------------------------- -->
                         {% endblock %}
 
-                        {% block about-main-posts %}
+                        {% block about-main-content %}
 <!-- About  ------------------------------------------- Main Posts----------------------------------------------- -->
                         {% endblock %}
 
@@ -271,7 +259,7 @@
 <!-- Copyright  ------------------------------------------- Head References----------------------------------------------- -->
                         {% endblock %}
 
-                        {% block privacy-main-posts %}
+                        {% block privacy-main-content %}
 <!-- Privacy  ------------------------------------------- Head References----------------------------------------------- -->
                         {% endblock %}
 
@@ -280,7 +268,7 @@
                         {% endblock %}
 
 
-                        {% block cookie-main-posts %}
+                        {% block cookie-main-content %}
 <!-- Cookie  ------------------------------------------- Head References----------------------------------------------- -->
                         {% endblock %}
 
@@ -318,13 +306,13 @@
 
                                 {% for i in most_viewed %}
                                 <div class="media latest_post">
-                                    <a class="media-left" href="{% url 'news_detail' name=j.name cat=j.catname %}">
+                                    <a class="media-left" href="{% url 'news_detail' name=i.name cat=i.catname %}">
                                         <img src="{{i.picurl}}" class="media-object" alt="">
                                     </a>
                                     <div class="media-body">
-                                        <h6 class="media-heading"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{i.name}}</a></h6>
+                                        <h6 class="media-heading"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h6>
                                         <div class="entry-meta">
-                                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{today}}</time></span>
+                                            <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{i.date}}</time></span>
                                         </div>
                                     </div>
                                 </div>
@@ -414,20 +402,24 @@
                                     <p>To make your visit amazing we are trying our<br>
                                         best to provide amazing, trending content<br>
                                         written by our most amazing and hard-working<br>
-                                        writers, Do enjoy your time here.</p> <br>
+                                        writers, Do enjoy your time here.<br><br>
+                                        Regarding any query, contact us at : </p> <br>
+                                        
                                     <p>Mail us on :&nbsp; &nbsp; <a href="#"><strong><span class="__cf_email__">teamdonutscroll@donutscroll.com</span></strong></a></p> 
                                     <p>Call us on &nbsp; :&nbsp; &nbsp;<a href="#"><strong><span class="__cf_email__">(+91 8849904104)</span></strong></a></p> 
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-2" >
                                 <div class="footer-box">
-                                    <h3 class="widget-title title-white">Need help</h3>
+                                    <h3 class="widget-title title-white">All We Have Got</h3>
                                     <ul class="footer-cat">
-                                        <li><a href="#">Our Community</a></li>
-                                        <li><a href="#">See Our Portfolio</a></li>
-                                        <li><a href="#">Story About Us</a></li>
-                                        <li><a href="#">Keep in Touch</a></li>
-                                        <li><a href="#">Purchase Our Products</a></li>
+                                        {% for i in category %}
+                                        <li><a href="{% url 'news_section' name=i.name %}">{{i.name}}</a></li>
+                                        {% endfor %}
+                                        <li><a href="{% url 'about' %}">About</a></li>
+                                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                        <li><a href="{% url 'cookie_policy' %}">Cookie Policy</a></li>
+                                        <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -437,13 +429,13 @@
                                     <!-- /.latest post -->
                                     {% for i in 3|bottom_news %}
                                     <div class="media latest_post">
-                                        <a class="media-left" href="{% url 'news_detail' name=j.name cat=j.catname %}">
+                                        <a class="media-left" href="{% url 'news_detail' name=i.name cat=i.catname %}">
                                             <img src="{{i.picurl}}" class="media-object" alt="">
                                         </a>
                                         <div class="media-body">
-                                            <h6 class="media-heading"><a href="{% url 'news_detail' name=j.name cat=j.catname %}">{{i.name}}</a></h6>
+                                            <h6 class="media-heading"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h6>
                                             <div class="entry-meta">
-                                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span>
+                                                <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time>{{i.date}}</time></span>
                                             </div>
                                         </div>
                                     </div>

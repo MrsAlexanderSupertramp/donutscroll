@@ -29,29 +29,29 @@
 
 {% block detail-main-posts %}
 
-<main class="col-sm-8 col-md-9 content p_r_40">
+<main class="col-sm-8 col-md-9 content p_r_40" style="margin-top: -40px;">
     <div class="details-body">
-
 
         <div class="post_details stickydetails">
             <header class="details-header">
-                <div class="post-cat"><a class="post-cat" href="#">{{news_details.catname}}</a></div>
+                <div class="post-cat"><a class="post-cat" href="{% url 'news_section' name=i.name %}">{{news_details.catname}}</a></div>
                 <h2>{{news_details.name | safe}}</h2>
                 <div class="element-block">
                     <div class="entry-meta">
                         &nbsp;&nbsp;<span class="" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; padding-top: 10px;"><i class="fa fa-calendar-o" aria-hidden="true">&nbsp;&nbsp;</i>{{today}} &nbsp;&nbsp; | &nbsp;&nbsp; DonutScroll</span> 
                     </div>
-                    <div class="reading-time"><span class="eta"></span> (<span class="words"></span> words)</div>
                     <figure>    
                         <img src="{{news_details.picurl}}" alt="" class="aligncenter img-responsive" style="width: 100%; padding-top: 20px;">
                     </figure>
+                    <div style="margin-top: -20px; text-align: center; font-size: 2px;">
+                        <p>{{i.piccredit}}</p>
+                    </div>
                 </div>
             </header>
-            <h4>{{news_details.intro_text | safe}}.</h4><hr><br>
+            <h4 style="word-spacing: 3px;">{{news_details.intro_text | safe}}.</h4><hr><br>
             <p>{{news_details.body_text | safe}}.</p>
         </div>
         <!-- /.End of post details -->
-
 
     </div>
     <!-- /.End of details body -->
@@ -67,7 +67,7 @@
                 <img src="{{i.picurl}}" alt="" style="border-radius: 50%;  height: 60px; width: 60px; object-fit: cover;" class="media-object">
             </div>
             <div class="media-body">
-                <h4 class="media-heading">{{i.name}} <small><i>Posted on February 19, 2016</i></small></h4>
+                <h4 class="media-heading">{{i.name}} <small><i>{{i.date}}</i></small></h4>
                 <p>{{i.body}}.</p>
                 <a class="btn link-btn btn-rounded" id="show">Reply ⇾</a>
             </div>
@@ -217,7 +217,7 @@
                         </div>
                         <div class="media-body">
                             <div class="post-header">
-                                <div class="post-cat"><span>In</span> <a href="#">{{i.catname}}</a></div>
+                                <div class="post-cat"><span>In</span> <a href="{% url 'news_section' name=i.name %}">{{i.catname}}</a></div>
                                 <h3 class="media-heading"><a href="{% url 'news_detail' name=i.name cat=i.catname %}">{{i.name}}</a></h3>
                                 <div class="entry-meta">
                                     <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time >{{i.date}}</time></span> 
@@ -270,7 +270,7 @@
 
 {% block detail-bottom-scripts %}
 
-<script data-cfasync="false" src="{% static 'front/cloudflare-% static/email-decode.min.js' %}"></script><script src="{% static 'front/js/jquery.min.js' %}"></script>
+<script data-cfasync="false" src="{% static 'front/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'front/js/jquery.min.js' %}"></script>
 <script src="{% static 'front/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'front/js/animsition.min.js' %}"></script>
 <script src="{% static 'front/js/bootsnav.js'%}"></script>

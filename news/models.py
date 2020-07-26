@@ -10,13 +10,13 @@ class News(models.Model):
     name = models.CharField(max_length=100, default="-")
     intro_text = models.TextField() 
     body_text = RichTextUploadingField() 
-    date = models.CharField(max_length=12, default="-")
-    time = models.CharField(max_length=12, default="00:00")
+    date = models.CharField(max_length=50, default="-")
+    time = models.CharField(max_length=50, default="00:00")
     picurl = models.TextField(default='-')
     picname = models.TextField(default="-")
+    piccredit = models.TextField(null=True, blank=True)
     writer = models.CharField(max_length=50, default="-")
     catname = models.CharField(max_length=50, default="-")
-    catid = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

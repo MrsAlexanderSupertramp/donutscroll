@@ -37,19 +37,27 @@ def news_add(request):
     hour = now.hour
     minute = now.minute
 
-    if len(str(day)) == 1 :
-        day = "0" + str(day)
-
-    if len(str(month)) == 1 :
-        month = "0" + str(month)
-
     if len(str(hour)) == 1 :
         hour = "0" + str(hour)
 
     if len(str(minute)) == 1 :
         minute = "0" + str(minute)
 
-    today = str(year) + "/" + str(month) + "/" + str(day)
+    # weekday = now.strftime("%A")
+
+    
+
+    month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    for i in range(11) :
+        if month == i+1 :
+            month = month_list[i]
+            break
+    
+    today = str(month) + " " + str(day) + ", " + str(year)
+    print(today)
+
+
     time  = str(hour) + ":" + str(minute)
 
     category = Category.objects.all()
@@ -58,13 +66,13 @@ def news_add(request):
 
         newstitle = request.POST.get('newstitle')
         newscat = request.POST.get('newscat')
-        newstrend = request.POST.get('newstrend')
         newsintro = request.POST.get('newsintro')
         newsbody = request.POST.get('newsbody')
+        newscredit = request.POST.get('newscredit')
         
 
 
-        if newstitle == "" or newscat == "" or newstrend == "" or newsbody == "" or newsintro == "" :
+        if newstitle == "" or newscat == "" or newsbody == "" or newsintro == "" :
             error = 'Fill all the required details.'
             return render(request, 'back/error.html', {'error': error})
 
@@ -75,26 +83,12 @@ def news_add(request):
             filename = fs.save(myfile.name, myfile)
             url = fs.url(filename)
 
-
             if str(myfile.content_type).startswith('image'):
 
                 if myfile.size < 5000000:
 
-                    obj = News(name=newstitle, intro_text=newsintro, body_text=newsbody, date=today, time= time, picname= filename, picurl=url, writer="-", catname=newscat, catid=0, views=0, trending=newstrend) 
+                    obj = News(name=newstitle, intro_text=newsintro, body_text=newsbody, date=today, time= time, picname= filename, picurl=url, piccredit=newscredit,writer="DonutScroll", catname=newscat) 
                     obj.save()
-
-                    # temp = len(News.objects.filter(catname = newscat))
-                    # obj2 = Category.objects.get(name = newscat)
-                    # obj2.count = temp
-
-                    # obj2.save()
-
-                    category = Category.objects.all()
-
-                    for i in category :
-                        i.count = len(News.objects.filter(catname = i.name))
-                        i.save()
-
 
                     return redirect('news_list')
 
@@ -113,6 +107,8 @@ def news_add(request):
                 return render(request, 'back/error.html', {'error': error})
 
         except :
+            fs = FileSystemStorage()
+            fs.delete(filename)
             error = 'You can not leave your image field empty.  '
             return render(request, 'back/error.html', {'error': error})    
         
@@ -189,6 +185,7 @@ def news_edit(request, pk):
             newstrend = request.POST.get('newstrend')
             newsintro = request.POST.get('newsintro')
             newsbody = request.POST.get('newsbody')
+            newscredit = request.POST.get('newscredit')
             
 
             if newstitle == "" or newscat == ""  or newstrend == "" or newsintro == "" or newsbody == "" :
@@ -217,7 +214,7 @@ def news_edit(request, pk):
                         obj.picname    = filename
                         obj.picurl     = url
                         obj.catname    = newscat
-                        obj.trending   = newstrend
+                        obj.piccredit  = newscredit
 
                         # all the special Posts by position will be modified here
                         try: 
@@ -286,7 +283,7 @@ def news_edit(request, pk):
                 obj.intro_text = newsintro
                 obj.body_text  = newsbody
                 obj.catname    = newscat
-                obj.trending   = newstrend
+                obj.piccredit  = newscredit
 
                 # all the special Posts by position will be modified here
                 try :

@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>OSRU - News, Blog & Magazine HTML Template</title>
+<title></title>
 <link href="{% static 'front/img/favicon.png' %}" rel="icon">
 <link href="{% static 'front/css/bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'front/css/animsition.min.css' %}" rel="stylesheet">
@@ -29,12 +29,22 @@
 {% block about-main-content %}
 
 <main class="col-sm-8 col-md-9 content p_r_40">
-    <div id="macy-container">
 
-        {{aaa}}
-        
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="contact-info">
+                    <div class="contact-address">
+                        <p>
+                            
+                            {{content.pagecontent | safe}}
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 
 </main>
 

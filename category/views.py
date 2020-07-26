@@ -3,42 +3,11 @@ from .models import Category
 
 def category_list(request):
 
-    # login check
-    if not request.user.is_authenticated :
-        return redirect('mylogin')
-
-    # masteruser check
-    # masteruser check
-    perm = 0
-    for i in request.user.groups.all() :
-        if i.name == "masteruser" :
-            perm = 1
-
-    if perm == 0 :
-        error = "Access Denied ! "
-        return render(request, 'back/error.html', {'error': error})
-
     name = Category.objects.all()
 
     return render(request, 'back/category_list.html', {'name' : name})
 
 def category_add(request):
-
-    # login check
-    if not request.user.is_authenticated :
-        return redirect('mylogin')
-
-    # masteruser check
-    # masteruser check
-    perm = 0
-    for i in request.user.groups.all() :
-        if i.name == "masteruser" :
-            perm = 1
-
-    if perm == 0 :
-        error = "Access Denied ! "
-        return render(request, 'back/error.html', {'error': error})
-
 
     if request.method == 'POST' :
 
@@ -61,21 +30,6 @@ def category_add(request):
     return render(request, 'back/category_add.html')
 
 def category_edit(request, pk):
-
-    # login check
-    if not request.user.is_authenticated :
-        return redirect('mylogin')
-
-    # masteruser check
-    # masteruser check
-    perm = 0
-    for i in request.user.groups.all() :
-        if i.name == "masteruser" :
-            perm = 1
-
-    if perm == 0 :
-        error = "Access Denied ! "
-        return render(request, 'back/error.html', {'error': error})
 
     obj = Category.objects.get(pk=pk)
 
@@ -100,21 +54,6 @@ def category_edit(request, pk):
 
 
 def category_delete(request, pk):
-
-    # login check
-    if not request.user.is_authenticated :
-        return redirect('mylogin')
-
-    # masteruser check
-    # masteruser check
-    perm = 0
-    for i in request.user.groups.all() :
-        if i.name == "masteruser" :
-            perm = 1
-
-    if perm == 0 :
-        error = "Access Denied ! "
-        return render(request, 'back/error.html', {'error': error})
 
     obj = Category.objects.get(pk=pk)
     obj.delete()

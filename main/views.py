@@ -31,8 +31,6 @@ def home(request):
     # newshead = News.objects.raw(
     #     'SELECT * FROM news_news WHERE catname="Fashion" UNION SELECT * FROM news_news WHERE catname="Travel"').reverse()
 
-    newshead = []
-
     heading_posts = HeadingDropdown.objects.all()
     
 
@@ -52,23 +50,6 @@ def home(request):
     masonryhome = MasonryHome.objects.all()
     pictures_gallery = PicturesGallery.objects.all()
     trending = Trending.objects.all()
-
-    # Temperature
-    # ip, is_routable = get_client_ip(request)
-
-    # try :
-    #     response = DbIpCity.get(ip, api_key='free')
-    #     city = response.city
-    # except :
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(round(json_data['main']['temp'] - 273.15, 1), 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -97,9 +78,8 @@ def home(request):
         "featured_home_general": featured_home_general,
         "masonryhome": masonryhome,
         "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
         'today': today,
+        'home': 'Home'
     }
 
 
@@ -115,19 +95,18 @@ def news_search(request):
     category  = Category.objects.all()
     trending = Trending.objects.all()
     allnews = News.objects.all()
-
-    newshead = []
-
-    for i in category:
-        newss = News.objects.filter(catname = i.name).order_by("pk").reverse()[:5]
-        for j in newss:
-            newshead.append(j)
+    most_viewed = MostViewed.objects.all()
+    pictures_gallery = PicturesGallery.objects.all()
+    heading_posts = HeadingDropdown.objects.all()
 
 
     if search :
-        newss = News.objects.filter(
-            Q(name__contains=search) | Q(body_text__contains=search) | Q(intro_text__contains=search) 
-        ).distinct()
+        a = News.objects.filter(name__contains=search)
+        b = News.objects.filter(intro_text__contains=search)
+        c = News.objects.filter(body_text__contains=search)
+
+        newss = list(chain(a,b,c))
+        newss = list(dict.fromkeys(newss))
 
     
     paginator = Paginator(newss,9)
@@ -141,22 +120,6 @@ def news_search(request):
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
 
-    for i in news:
-        print(i.name)
-
-    for i in newss:
-        print(i.name)
-
-    # Temperature
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -176,16 +139,14 @@ def news_search(request):
     dictionary = {
         'news': news, 
         'category': category, 
-        'newshead': newshead,
         'trending': trending,
+        'most_viewed': most_viewed,
+        'heading_posts': heading_posts,
+        'pictures_gallery': pictures_gallery,
         'last': last,
-        'temp': temp,
-        'city': city,
         'today': today,
+        'search': 'Search Results',
     }
-
-    for i in News.objects.all():
-        print(i.name)
 
 
 
@@ -193,82 +154,82 @@ def news_search(request):
     
 
 def news_detail(request, name, cat):
-
-    category  = Category.objects.all()
-    news = News.objects.all()
-    news_details = News.objects.get(name=name)
-    comments = Comments.objects.filter(news_id=news_details.pk)
-    trending = Trending.objects.all()
-    heading_posts = HeadingDropdown.objects.all()
-    most_viewed = MostViewed.objects.all()
-    related_posts = News.objects.filter(catname=news_details.catname).order_by('-pk')[: 7]
-    pictures_gallery = PicturesGallery.objects.all()
-
-
-    replies = []
-
-    for c in comments :
-        comments_reply = Comments_Reply.objects.filter(comment_id=c.pk)
-        for d in comments_reply :
-            replies.append(d)
-
-    comments_count = comments.count() + len(replies)
-
-    newshead = []
-
-    for i in category:
-        newss = News.objects.filter(catname = i.name).order_by("pk").reverse()[:5]
-        for j in newss:
-            newshead.append(j)
-
-    comments_count = comments.count() + len(replies)
+    try:
+        category  = Category.objects.all()
+        news = News.objects.all()
+        news_details = News.objects.get(name=name)
+        comments = Comments.objects.filter(news_id=news_details.pk)
+        trending = Trending.objects.all()
+        heading_posts = HeadingDropdown.objects.all()
+        most_viewed = MostViewed.objects.all()
+        related_posts = News.objects.filter(catname=news_details.catname).order_by('-pk')[: 7]
+        pictures_gallery = PicturesGallery.objects.all()
 
 
-    # Temperature
-    city = 'Delhi'
+        replies = []
 
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
+        for c in comments :
+            comments_reply = Comments_Reply.objects.filter(comment_id=c.pk)
+            for d in comments_reply :
+                replies.append(d)
 
-    source = urllib.request.urlopen(url).read()
+        comments_count = comments.count() + len(replies)
 
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
+        newshead = []
 
-    # Datetime
-    now = datetime.datetime.now()   
-    month = now.month
-    day = now.day
-    weekday = now.strftime("%A")
+        for i in category:
+            newss = News.objects.filter(catname = i.name).order_by("pk").reverse()[:5]
+            for j in newss:
+                newshead.append(j)
 
-    month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        comments_count = comments.count() + len(replies)
 
-    for i in range(11) :
-        if month == i+1 :
-            month = month_list[i]
-            break
-    
-    today = str(weekday) + " , " + str(month) + " " + str(day)
 
-    dictionary = {
-        'news': news, 
-        'category': category, 
-        'trending': trending, 
-        'heading_posts': heading_posts,
-        'most_viewed': most_viewed,
-        'news_details': news_details, 
-        "pictures_gallery": pictures_gallery,
-        'comments': comments, 
-        'comments_reply': replies, 
-        'comments_count': comments_count, 
-        'pk': news_details.pk,
-        'temp': temp,
-        'city': city,
-        'today': today,
-        'related_posts': related_posts,
-    }
+        # # Temperature
+        # city = 'Delhi'
 
-    return render(request, 'front/news_detail.html', dictionary)
+        # api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
+        # url = api_address + city
+
+        # source = urllib.request.urlopen(url).read()
+
+        # json_data = json.loads(source)
+        # temp = round(json_data['main']['temp'] - 273.15, 1)
+
+        # Datetime
+        now = datetime.datetime.now()   
+        month = now.month
+        day = now.day
+        weekday = now.strftime("%A")
+
+        month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+        for i in range(11) :
+            if month == i+1 :
+                month = month_list[i]
+                break
+        
+        today = str(weekday) + " , " + str(month) + " " + str(day)
+
+        dictionary = {
+            'news': news, 
+            'category': category, 
+            'trending': trending, 
+            'heading_posts': heading_posts,
+            'most_viewed': most_viewed,
+            'news_details': news_details, 
+            "pictures_gallery": pictures_gallery,
+            'comments': comments, 
+            'comments_reply': replies, 
+            'comments_count': comments_count, 
+            'pk': news_details.pk,
+            'today': today,
+            'related_posts': related_posts,
+        }
+
+        return render(request, 'front/news_detail.html', dictionary)
+    except:
+        return redirect('error')
 
 
 def comments_add(request):
@@ -295,7 +256,7 @@ def comments_add(request):
                 month = month_list[i]
                 break
         
-        today = str(weekday) + " , " + str(month) + " " + str(day) + "," + str(year)
+        today = str(day) + " " + str(month) +  ", " + str(year)
 
 
         if CommentBody != "" and CommentEmail != "" and CommentName != "" :
@@ -398,10 +359,12 @@ def comments_reply_add(request):
 
 
 def news_section(request, name):
+
     category  = Category.objects.all()
     trending = Trending.objects.all()
     most_viewed = MostViewed.objects.all()
     pictures_gallery = PicturesGallery.objects.all()
+
 
     heading_posts = HeadingDropdown.objects.all()
 
@@ -418,17 +381,6 @@ def news_section(request, name):
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
 
-
-        # Temperature
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -453,9 +405,8 @@ def news_section(request, name):
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
         'last': last,
-        'temp': temp,
-        'city': city,
         'today': today,
+        'catname': name,
     }
 
     return render(request, 'front/news_section.html', dictionary)
@@ -463,16 +414,11 @@ def news_section(request, name):
 
 def panel(request):
 
-    # Controlling User Access to Control Panel
-    if not request.user.is_authenticated :
-        return redirect('mylogin')
-
 
     return render(request, 'back/panel.html')
 
 
 def mylogin(request):
-    print("------------------------")
 
     if request.method == 'POST' :
 
@@ -592,28 +538,13 @@ def mylogout(request):
 def error(request) :
 
     category  = Category.objects.all()
+    trending = Trending.objects.all()
+    heading_posts = HeadingDropdown.objects.all()
+    most_viewed = MostViewed.objects.all()
+    pictures_gallery = PicturesGallery.objects.all()
 
     news = News.objects.all()
 
-    newshead = []
-
-    for i in category:
-        newss = News.objects.filter(catname = i.name).order_by("pk").reverse()[:5]
-        for j in newss:
-            newshead.append(j)
-
-    newstrend = News.objects.filter(trending=True)
-
-    # Temperature
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -633,11 +564,12 @@ def error(request) :
     dictionary = {
         'news': news, 
         'category': category, 
-        'newstrend': newstrend, 
-        'newshead': newshead,
-        'temp': temp,
-        'city': city,
+        'trending': trending,
+        'heading_posts': heading_posts,
+        'most_viewed': most_viewed,
         'today': today,
+        'pictures_gallery': pictures_gallery,
+        'error': "404, Page Could Not Found",
     }
     
 
@@ -752,7 +684,6 @@ def masonry_home_delete(request, pk) :
     return redirect('post_by_position')
 
 
-
 def trending_list(request):
 
     if request.method == 'POST' :
@@ -781,6 +712,16 @@ def trending_remove(request, pk) :
 
     return redirect('trending_list')
 
+
+def trending_forward(request, name):
+    try:
+        post = News.objects.get(name=name)
+
+        return redirect('news_detail', post.catname, name)
+
+    except:
+        return redirect('error')
+        
 
 def pictures_gallery(request):
 
@@ -836,119 +777,97 @@ def pictures_gallery_delete(request, pk):
 
 def about(request):
 
+    try :
 
-    category  = Category.objects.all()
+        category  = Category.objects.all() 
+        heading_posts = HeadingDropdown.objects.all()
+        
 
-    newshead = []
+        most_viewed = MostViewed.objects.all()
+        pictures_gallery = PicturesGallery.objects.all()
+        content = ExtraPages.objects.get(pagename="About")
+        trending = Trending.objects.all() 
 
-    heading_posts = HeadingDropdown.objects.all()
-    
 
-    most_viewed = MostViewed.objects.all()
-    pictures_gallery = PicturesGallery.objects.all()
-    content = ExtraPages.objects.get(pagename="About")
-    trending = Trending.objects.all() 
+        # Datetime
+        now = datetime.datetime.now()
+        month = now.month
+        day = now.day
+        weekday = now.strftime("%A")
 
-    city = 'Delhi'
+        
 
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
+        month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-    source = urllib.request.urlopen(url).read()
+        for i in range(11) :
+            if month == i+1 :
+                month = month_list[i]
+                break
+        
+        today = str(weekday) + " , " + str(month) + " " + str(day)
 
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
+        dictionary = {
+            'category': category, 
+            'trending': trending, 
+            'heading_posts': heading_posts,
+            'most_viewed': most_viewed,
+            'content': content,
+            "pictures_gallery": pictures_gallery,
+            'today': today,
+            'about': 'About Us',
+        }
 
-    # Datetime
-    now = datetime.datetime.now()
-    month = now.month
-    day = now.day
-    weekday = now.strftime("%A")
+        return render(request, 'front_extra/about.html', dictionary)
+    except :
+        return HttpResponse("Something went wrong on About page. Try checking whether there is some content available under 'About' banner.")
 
-    
-
-    month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-    for i in range(11) :
-        if month == i+1 :
-            month = month_list[i]
-            break
-    
-    today = str(weekday) + " , " + str(month) + " " + str(day)
-
-    dictionary = {
-        'category': category, 
-        'trending': trending, 
-        'heading_posts': heading_posts,
-        'most_viewed': most_viewed,
-        'content': content,
-        "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
-        'today': today,
-    }
-
-    print(content)
-
-    return render(request, 'front_extra/contact.html', dictionary)
 
 
 def contact(request):
 
+    try:
+        category  = Category.objects.all()
 
-    category  = Category.objects.all()
+        heading_posts = HeadingDropdown.objects.all()
+        
 
-    newshead = []
-
-    heading_posts = HeadingDropdown.objects.all()
-    
-
-    most_viewed = MostViewed.objects.all()
-    pictures_gallery = PicturesGallery.objects.all()
-    content = ExtraPages.objects.get(pagename="Contact Us")
-    trending = Trending.objects.all()
-
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
-
-    # Datetime
-    now = datetime.datetime.now()
-    month = now.month
-    day = now.day
-    weekday = now.strftime("%A")
-
-    
-
-    month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-    for i in range(11) :
-        if month == i+1 :
-            month = month_list[i]
-            break
-    
-    today = str(weekday) + " , " + str(month) + " " + str(day)
-
-    dictionary = {
-        'category': category, 
-        'trending': trending, 
-        'heading_posts': heading_posts,
-        'most_viewed': most_viewed,
-        "pictures_gallery": pictures_gallery,
-        "content": content,
-        'temp': temp,
-        'city': city,
-        'today': today,
-    }
+        most_viewed = MostViewed.objects.all()
+        pictures_gallery = PicturesGallery.objects.all()
+        content = ExtraPages.objects.get(pagename="Contact Us")
+        trending = Trending.objects.all()
 
 
-    return render(request, 'front_extra/contact.html', dictionary)
+        # Datetime
+        now = datetime.datetime.now()
+        month = now.month
+        day = now.day
+        weekday = now.strftime("%A")
+
+        
+
+        month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+        for i in range(11) :
+            if month == i+1 :
+                month = month_list[i]
+                break
+        
+        today = str(weekday) + " , " + str(month) + " " + str(day)
+
+        dictionary = {
+            'category': category, 
+            'trending': trending, 
+            'heading_posts': heading_posts,
+            'most_viewed': most_viewed,
+            "pictures_gallery": pictures_gallery,
+            "content": content,
+            'today': today,
+            'contact': 'Contact Us',
+        }
+
+        return render(request, 'front_extra/contact.html', dictionary)
+    except:
+        return HttpResponse("Something went wrong on Contact page. Try checking whether there is some content available under Contact Us banner.")
 
 
 def copyright(request):
@@ -966,15 +885,6 @@ def copyright(request):
 
     newstrend = News.objects.filter(trending=True)
 
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -999,8 +909,6 @@ def copyright(request):
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
         'today': today,
     }
 
@@ -1009,114 +917,97 @@ def copyright(request):
 
 def privacy_policy(request):
 
+    try:
+        category  = Category.objects.all() 
+        heading_posts = HeadingDropdown.objects.all()
+        
 
-    category  = Category.objects.all()
+        most_viewed = MostViewed.objects.all()
+        pictures_gallery = PicturesGallery.objects.all()
+        content = ExtraPages.objects.get(pagename="Privacy")
+        trending = Trending.objects.all() 
 
-    newshead = []
 
-    heading_posts = HeadingDropdown.objects.all()
-    
+        # Datetime
+        now = datetime.datetime.now()
+        month = now.month
+        day = now.day
+        weekday = now.strftime("%A")
 
-    most_viewed = MostViewed.objects.all()
-    pictures_gallery = PicturesGallery.objects.all()
+        
 
-    newstrend = News.objects.filter(trending=True)
+        month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-    city = 'Delhi'
+        for i in range(11) :
+            if month == i+1 :
+                month = month_list[i]
+                break
+        
+        today = str(weekday) + " , " + str(month) + " " + str(day)
 
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
+        dictionary = {
+            'category': category, 
+            'trending': trending, 
+            'heading_posts': heading_posts,
+            'most_viewed': most_viewed,
+            'content': content,
+            "pictures_gallery": pictures_gallery,
+            'today': today,
+            'privacy': 'Privacy Policy',
+        }
 
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
-
-    # Datetime
-    now = datetime.datetime.now()
-    month = now.month
-    day = now.day
-    weekday = now.strftime("%A")
-
-    
-
-    month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-    for i in range(11) :
-        if month == i+1 :
-            month = month_list[i]
-            break
-    
-    today = str(weekday) + " , " + str(month) + " " + str(day)
-
-    dictionary = {
-        'category': category, 
-        'newstrend': newstrend, 
-        'heading_posts': heading_posts,
-        'most_viewed': most_viewed,
-        "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
-        'today': today,
-    }
-
-    return render(request, 'front/privacy_policy.html', dictionary)
+        return render(request, 'front_extra/privacy.html', dictionary)
+    except:
+        return HttpResponse("Something went wrong on Privacy Policy page. Try checking whether there is some content available under 'Privacy' Us banner.")
 
 
 def cookie_policy(request):
 
+    try:
 
-    category  = Category.objects.all()
+        category  = Category.objects.all() 
+        heading_posts = HeadingDropdown.objects.all()
+        
 
-    newshead = []
+        most_viewed = MostViewed.objects.all()
+        pictures_gallery = PicturesGallery.objects.all()
+        content = ExtraPages.objects.get(pagename="Cookie")
+        trending = Trending.objects.all() 
 
-    heading_posts = HeadingDropdown.objects.all()
-    
 
-    most_viewed = MostViewed.objects.all()
-    pictures_gallery = PicturesGallery.objects.all()
+        # Datetime
+        now = datetime.datetime.now()
+        month = now.month
+        day = now.day
+        weekday = now.strftime("%A")
 
-    newstrend = News.objects.filter(trending=True)
+        
 
-    city = 'Delhi'
+        month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
+        for i in range(11) :
+            if month == i+1 :
+                month = month_list[i]
+                break
+        
+        today = str(weekday) + " , " + str(month) + " " + str(day)
 
-    source = urllib.request.urlopen(url).read()
+        dictionary = {
+            'category': category, 
+            'trending': trending, 
+            'heading_posts': heading_posts,
+            'most_viewed': most_viewed,
+            'content': content,
+            "pictures_gallery": pictures_gallery,
+            'today': today,
+            'cookie': 'Cookie Policy',
+        }
 
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
+        return render(request, 'front_extra/cookie.html', dictionary)
 
-    # Datetime
-    now = datetime.datetime.now()
-    month = now.month
-    day = now.day
-    weekday = now.strftime("%A")
+    except:
+        return HttpResponse("Something went wrong on Cookie page. Try checking whether there is some content available under 'Cookie' Us banner.")
 
-    
-
-    month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-    for i in range(11) :
-        if month == i+1 :
-            month = month_list[i]
-            break
-    
-    today = str(weekday) + " , " + str(month) + " " + str(day)
-
-    dictionary = {
-        'category': category, 
-        'newstrend': newstrend, 
-        'heading_posts': heading_posts,
-        'most_viewed': most_viewed,
-        "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
-        'today': today,
-    }
-
-    return render(request, 'front/cookie_policy.html', dictionary)
 
 
 def terms_of_service(request):
@@ -1134,16 +1025,6 @@ def terms_of_service(request):
 
     newstrend = News.objects.filter(trending=True)
 
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
-
     # Datetime
     now = datetime.datetime.now()
     month = now.month
@@ -1167,8 +1048,6 @@ def terms_of_service(request):
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
         'today': today,
     }
 
@@ -1190,15 +1069,6 @@ def diversity_and_corrections_policy(request):
 
     newstrend = News.objects.filter(trending=True)
 
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1223,8 +1093,6 @@ def diversity_and_corrections_policy(request):
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
         'today': today,
     }
 
@@ -1246,15 +1114,6 @@ def ownership(request):
 
     newstrend = News.objects.filter(trending=True)
 
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
 
     # Datetime
     now = datetime.datetime.now()
@@ -1279,8 +1138,6 @@ def ownership(request):
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
         'today': today,
     }
 
@@ -1302,16 +1159,6 @@ def ethics_policy(request):
 
     newstrend = News.objects.filter(trending=True)
 
-    city = 'Delhi'
-
-    api_address = "https://api.openweathermap.org/data/2.5/weather?appid=3901fffe544e24790a601a25c1182976&q="
-    url = api_address + city
-
-    source = urllib.request.urlopen(url).read()
-
-    json_data = json.loads(source)
-    temp = round(json_data['main']['temp'] - 273.15, 1)
-
     # Datetime
     now = datetime.datetime.now()
     month = now.month
@@ -1335,8 +1182,6 @@ def ethics_policy(request):
         'heading_posts': heading_posts,
         'most_viewed': most_viewed,
         "pictures_gallery": pictures_gallery,
-        'temp': temp,
-        'city': city,
         'today': today,
     }
 
@@ -1412,10 +1257,6 @@ def extra_pages_content(request, pk) :
     except:
         error =  "Object not found !"
         return render(request, 'back/error.html', {'error': error})
-
-
-
-
 
 
 
