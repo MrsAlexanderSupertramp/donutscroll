@@ -25,7 +25,7 @@ SECRET_KEY = '#3_06-tq(@#*betdm%bq-4a)5faoxnv_hk%3$2h!dl2tij7!hh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'donutscroll.herokuapp.com', '*']
+ALLOWED_HOSTS = ['*', 'ec2-13-127-40-215.ap-south-1.compute.amazonaws.com:8000']
 
 
 # Application definition
