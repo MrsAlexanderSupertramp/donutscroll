@@ -20,7 +20,7 @@ django-js-asset==1.2.2
 django-social-share==1.4.0
 django-summernote==0.8.11.6
 django-unused-media==0.1.13
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 docutils==0.16
 filelock==3.0.12
 future==0.18.2
