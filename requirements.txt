@@ -80,7 +80,7 @@ typed-ast==1.4.1
 typing==3.7.4.1
 Unipath==1.1
 uritemplate==3.0.1
-urllib3==1.25.8
+urllib3==1.26.5
 virtualenv==20.0.7
 virtualenvwrapper-win==1.2.6
 webencodings==0.5.1
